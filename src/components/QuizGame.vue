@@ -6,19 +6,22 @@
         {{ settings.questionAmount }}
       </p>
       <p>Score: {{ score }}</p>
-      <img
-        v-if="currentFlashcard"
-        class="quiz-image"
-        :src="currentFlashcard.imageUrl"
-      />
-      <div>
-        <button
-          v-for="flashcard in currentQuestionFlashcards"
-          :key="flashcard.vocabulary"
-          v-on:click="processAnswer(flashcard.vocabulary)"
-        >
-          {{ flashcard.vocabulary }}
-        </button>
+      <div v-if="currentFlashcard">
+        <img
+          v-if="currentFlashcard"
+          class="quiz-image"
+          :src="currentFlashcard.imageUrl"
+        />
+        <p class="answer"><span v-if="isShowAnswer">{{ currentFlashcard.vocabulary }}</span></p>
+        <div>
+          <button
+            v-for="flashcard in currentQuestionFlashcards"
+            :key="flashcard.vocabulary"
+            v-on:click="processAnswer(flashcard.vocabulary)"
+          >
+            {{ flashcard.vocabulary }}
+          </button>
+        </div>
       </div>
       <button class="settings-button" v-on:click="settings.isShowSettings = true">
         Settings
@@ -45,6 +48,7 @@ export default {
       currentQuestionIndex: 0,
       currentQuestionFlashcards: [],
       score: 0,
+      isShowAnswer: false,
       answerHistory: { correctAnswers: [], incorrectAnswers: [] },
     };
   },
@@ -72,15 +76,21 @@ export default {
       this.currentQuestionFlashcards = questionFlashcards;
     },
     processAnswer(answer) {
-      if (answer === this.currentFlashcard.vocabulary) {
-        this.score++;
-        this.answerHistory.correctAnswers.push(this.currentFlashcard);
-      } else {
-        this.answerHistory.incorrectAnswers.push(this.currentFlashcard);
-      }
+      if(this.isShowAnswer === false) {
+        if (answer === this.currentFlashcard.vocabulary) {
+          this.score++;
+          this.answerHistory.correctAnswers.push(this.currentFlashcard);
+        } else {
+          this.answerHistory.incorrectAnswers.push(this.currentFlashcard);
+        }
 
-      this.currentQuestionIndex++;
-      this.setCurrentQuestionFlashcards();
+        this.isShowAnswer = true;
+        setTimeout(()=>{
+          this.isShowAnswer = false;
+          this.currentQuestionIndex++;
+          this.setCurrentQuestionFlashcards();
+        }, 2000)
+      }
     },
     playAgain() {
       this.currentQuestionIndex = 0;
@@ -98,6 +108,9 @@ export default {
   height: 200px;
   width: 200px;
   margin: 20px auto;
+}
+.answer {
+  height: 10px;
 }
 .settings-button {
   float: left;
