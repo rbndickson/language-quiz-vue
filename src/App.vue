@@ -1,26 +1,49 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <QuizPage />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import QuizPage from "./components/QuizPage.vue";
+import { reactive } from "vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    QuizPage,
+  },
+  props: {
+    flashcards: { type: Array, required: true },
+    languageVariety: { type: String, required: true },
+    category: { type: String, required: true },
+    languageVarietyEmojiCode: { type: String, required: true },
+    categoryEmojiCode: { type: String, required: true },
+  },
+  provide() {
+    const defaultQuestionAmount = this.flashcards.length > 5 ? 5 : this.flashcards.length;
+
+    let settings = reactive({
+      isShowSettings: true,
+      questionAmount: defaultQuestionAmount,
+      level: "standard",
+    });
+
+    return {
+      languageVariety: this.languageVariety,
+      category: this.category,
+      languageVarietyEmojiCode: this.languageVarietyEmojiCode,
+      categoryEmojiCode: this.categoryEmojiCode,
+      flashcards: this.flashcards,
+      settings,
+    };
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Varela Round", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
