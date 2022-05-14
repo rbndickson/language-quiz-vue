@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center">
     <h2>Finished!</h2>
     <p>You scored {{ score }} out of {{ settings.questionAmount }}</p>
     <br />

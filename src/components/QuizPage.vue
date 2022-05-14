@@ -1,6 +1,6 @@
 <template>
   <div id="quiz" class="quiz">
-    <h1>{{ languageVariety }} {{ category }} Quiz</h1>
+    <h1 class="text-center">{{ languageVariety }} {{ category }} Quiz</h1>
     <QuizSettings v-if="settings.isShowSettings" />
     <QuizGame v-else />
   </div>
@@ -19,7 +19,11 @@ export default {
 
 <style>
 .quiz {
+  position: relative;
+  background-color: #fff;
   max-width: 580px;
   margin: 60px auto 20px auto;
+  border-radius: 5px;
+  padding: 10px;
 }
 </style>

@@ -1,19 +1,19 @@
 <template lang="">
   <div>
     <div v-if="currentQuestionIndex < settings.questionAmount">
-      <p>
+      <p class="text-center">
         Question: {{ currentQuestionIndex + 1 }} of
         {{ settings.questionAmount }}
       </p>
-      <p>Score: {{ score }}</p>
-      <div v-if="currentFlashcard">
+      <p class="text-center">Score: {{ score }}</p>
+      <div v-if="currentFlashcard" class="text-center">
         <img
           v-if="currentFlashcard"
           class="quiz-image"
           :src="currentFlashcard.imageUrl"
         />
         <p class="answer"><span v-if="isShowAnswer">{{ currentFlashcard.vocabulary }}</span></p>
-        <div>
+        <div class="text-center">
           <button
             v-for="flashcard in currentQuestionFlashcards"
             :key="flashcard.vocabulary"
@@ -109,8 +109,7 @@ export default {
 
 <style>
 .quiz-image {
-  height: 200px;
-  width: 200px;
+  width: 150px;
   margin: 20px auto;
 }
 .answer {
@@ -123,6 +122,5 @@ export default {
   background-color: red
 }
 .settings-button {
-  float: left;
 }
 </style>

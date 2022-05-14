@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="quiz-settings">
     <section class="pure-u-1 pure-u-md-1-2">
-      <p>Questions: {{ settings.questionAmount }}</p>
-      <div>
+      <p class="text-center">Questions:</p>
+      <div class="quiz-settings-question-amount text-center">{{ settings.questionAmount }}</div>
+      <div class="question-amount-buttons text-center">
         <button
           v-if="flashcards.length >= 5"
           v-on:click="settings.questionAmount = 5"
@@ -22,21 +23,22 @@
           max
         </button>
       </div>
-      <div>
-        <p>Level</p>
+      <div class="text-center">
+        <p>Level:</p>
         <input
           id="standard"
+          class="quiz-input"
           type="radio"
           value="standard"
           v-model="settings.level"
         />
         <label htmlFor="standard">Standard</label>
-        <input id="extra" type="radio" value="extra" v-model="settings.level" />
+        <input id="extra" class="quiz-input" type="radio" value="extra" v-model="settings.level" />
         <label htmlFor="extra">Extra</label>
       </div>
     </section>
     <section class="pure-u-1 pure-u-md-1-2">
-      <div>
+      <div class="quiz-start-images">
         <img
           :src="languageEmojiUrl"
           height="100"
@@ -78,4 +80,33 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style>
+.quiz-settings {
+  font-size: 18px;
+}
+.quiz-settings p {
+  margin: 0;
+}
+.quiz-settings-question-amount {
+  font-size: 64px;
+  margin: 10px 0 15px 0;
+}
+.question-amount-buttons {
+  margin: 0 0 20px 0;
+}
+.quiz-input {
+  margin: 20px 2px 20px 10px;
+}
+.quiz-start-images img {
+  height: 90px;
+  width: 90px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .quiz-start-images {
+    display: none;
+  }
+}
+</style>
