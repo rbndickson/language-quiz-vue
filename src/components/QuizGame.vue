@@ -18,6 +18,10 @@
             v-for="flashcard in currentQuestionFlashcards"
             :key="flashcard.vocabulary"
             v-on:click="processAnswer(flashcard.vocabulary)"
+            :class="{
+              'correct-answer': isShowAnswer && flashcard.vocabulary === this.currentFlashcard.vocabulary,
+              'incorrect-answer': isShowAnswer && flashcard.vocabulary !== this.currentFlashcard.vocabulary
+            }"
           >
             {{ flashcard.vocabulary }}
           </button>
@@ -111,6 +115,12 @@ export default {
 }
 .answer {
   height: 10px;
+}
+.correct-answer {
+  background-color: green
+}
+.incorrect-answer {
+  background-color: red
 }
 .settings-button {
   float: left;
