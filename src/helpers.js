@@ -4,3 +4,7 @@ export function shuffle(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+export function sample(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}

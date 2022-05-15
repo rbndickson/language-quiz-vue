@@ -2,6 +2,7 @@
   <div class="text-center">
     <h2>Finished!</h2>
     <h3>You scored {{ score }} out of {{ settings.questionAmount }}</h3>
+    <QuizResultImage :score="score"></QuizResultImage>
     <div>
       <AppButton
         v-on:click="$emit('playAgain')"
@@ -43,9 +44,10 @@
 
 <script>
 import AppButton from './AppButton';
+import QuizResultImage from './QuizResultImage';
 
 export default {
-  components: { AppButton },
+  components: { AppButton, QuizResultImage },
   props: ["score", "answerHistory"],
   inject: ["settings"],
 };
