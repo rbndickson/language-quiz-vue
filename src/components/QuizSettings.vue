@@ -1,7 +1,7 @@
 <template>
   <div class="quiz-settings">
     <section class="pure-u-1 pure-u-md-1-2">
-      <p class="text-center">Questions:</p>
+      <div class="quiz-settings-label text-center">Questions:</div>
       <div class="quiz-settings-question-amount text-center">{{ settings.questionAmount }}</div>
       <div class="question-amount-buttons text-center">
         <AppButton
@@ -30,7 +30,7 @@
         </AppButton>
       </div>
       <div class="text-center">
-        <p>Level:</p>
+        <div class="quiz-settings-label">Level:</div>
         <input
           id="standard"
           class="quiz-input"
@@ -98,8 +98,8 @@ export default {
 .quiz-settings {
   font-size: 18px;
 }
-.quiz-settings p {
-  margin: 0;
+.quiz-settings-label {
+  margin: 5px 0;
 }
 .quiz-settings-question-amount {
   font-size: 64px;
