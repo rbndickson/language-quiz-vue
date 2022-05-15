@@ -47,14 +47,14 @@
       <div class="quiz-start-images">
         <img
           :src="languageEmojiUrl"
-          height="100"
-          width="100"
+          height=100
+          width=100
           :alt="`${languageVariety} icon`"
         />
         <img
           :src="categoryEmojiUrl"
-          height="100"
-          width="100"
+          height=100
+          width=100
           :alt="`${category} icon`"
         />
       </div>
@@ -117,8 +117,6 @@ export default {
   margin-bottom: 30px;
 }
 .quiz-start-images img {
-  height: 90px;
-  width: 90px;
   padding: 10px;
   box-sizing: border-box;
 }

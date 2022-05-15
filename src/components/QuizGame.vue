@@ -11,6 +11,8 @@
       <div v-if="currentFlashcard" class="text-center">
         <img
           v-if="currentFlashcard"
+          height=150
+          width=150
           class="quiz-image"
           :src="currentFlashcard.imageUrl"
         />
@@ -133,7 +135,6 @@ export default {
   }
 }
 .quiz-image {
-  width: 150px;
   margin: 20px auto;
 }
 .answer {
