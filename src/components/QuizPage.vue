@@ -1,5 +1,5 @@
 <template>
-  <div id="quiz" class="quiz">
+  <div class="quiz-page">
     <h1 class="text-center">{{ languageVariety }} {{ category }} Quiz</h1>
     <QuizSettings v-if="settings.isShowSettings" />
     <QuizGame v-else />
@@ -17,8 +17,8 @@ export default {
 };
 </script>
 
-<style>
-.quiz {
+<style scoped>
+.quiz-page {
   position: relative;
   background-color: #fff;
   max-width: 580px;

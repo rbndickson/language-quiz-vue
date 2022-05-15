@@ -16,7 +16,7 @@
           class="quiz-image"
           :src="currentFlashcard.imageUrl"
         />
-        <p class="answer"><span v-if="isShowAnswer">{{ currentFlashcard.vocabulary }}</span></p>
+        <p class="quiz-answer"><span v-if="isShowAnswer">{{ currentFlashcard.vocabulary }}</span></p>
         <div class="quiz-buttons"
           :class="{
             'quiz-buttons-extra': settings.level === 'extra',
@@ -121,7 +121,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .quiz-header {
   display: flex;
   flex-direction: row;
@@ -137,7 +137,7 @@ export default {
 .quiz-image {
   margin: 20px auto;
 }
-.answer {
+.quiz-answer {
   height: 10px;
 }
 .quiz-buttons {

@@ -2,8 +2,8 @@
   <button
     class="quiz-button-base"
     :class="{
-      'correct': correct,
-      'incorrect': incorrect,
+      'quiz-button-correct': correct,
+      'quiz-button-incorrect': incorrect,
     }">
     <slot></slot>
   </button>
@@ -42,19 +42,19 @@ export default {
   background: #eef6fc;
 }
 
-.correct {
+.quiz-button-correct {
   background-color: #d9ffbd;
 
 }
-.correct:hover {
+.quiz-button-correct:hover {
   background-color: #d9ffbd;
 }
 
-.incorrect {
+.quiz-button-incorrect {
   background-color: #ffbdd3;
 
 }
-.incorrect:hover {
+.quiz-button-incorrect:hover {
   background-color: #ffbdd3;
 }
 </style>

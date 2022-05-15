@@ -94,7 +94,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .quiz-settings {
   font-size: 18px;
 }

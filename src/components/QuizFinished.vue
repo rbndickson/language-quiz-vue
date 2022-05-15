@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .quiz-answer-list-item {
   display: flex;
   align-items: center;
