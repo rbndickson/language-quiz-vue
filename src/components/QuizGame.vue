@@ -1,11 +1,13 @@
 <template lang="">
   <div>
     <div v-if="currentQuestionIndex < settings.questionAmount">
-      <p class="text-center">
-        Question: {{ currentQuestionIndex + 1 }} of
-        {{ settings.questionAmount }}
-      </p>
-      <p class="text-center">Score: {{ score }}</p>
+      <header class="quiz-header">
+        <p class="text-center">
+          Question: {{ currentQuestionIndex + 1 }} of
+          {{ settings.questionAmount }}
+        </p>
+        <p class="text-center">Score: {{ score }}</p>
+      </header>
       <div v-if="currentFlashcard" class="text-center">
         <img
           v-if="currentFlashcard"
@@ -118,6 +120,18 @@ export default {
 </script>
 
 <style>
+.quiz-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 500px;
+  margin: 0 auto;
+}
+@media (max-width: 480px) {
+  .quiz-header {
+    font-size: 20px;
+  }
+}
 .quiz-image {
   width: 150px;
   margin: 20px auto;
