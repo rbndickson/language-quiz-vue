@@ -26,7 +26,7 @@
         v-for="flashcard in answerHistory.correctAnswers"
         :key="flashcard.vocabulary"
       >
-        <img height=25 width=25 class='quiz-answer-item-emoji' :src="flashcard.imageUrl" />{{ flashcard.vocabulary }}
+        <img height=30 width=30 class='quiz-answer-item-emoji' :src="flashcard.imageUrl" />{{ flashcard.vocabulary }}
       </li>
     </ul>
     <h4>Words you answered incorrectly:</h4>
@@ -36,7 +36,7 @@
         v-for="flashcard in answerHistory.incorrectAnswers"
         :key="flashcard.vocabulary"
       >
-        <img height=25 width=25 class='quiz-answer-item-emoji' :src="flashcard.imageUrl" /> {{ flashcard.vocabulary }}
+        <img height=30 width=30 class='quiz-answer-item-emoji' :src="flashcard.imageUrl" /> {{ flashcard.vocabulary }}
       </li>
     </ul>
   </div>
