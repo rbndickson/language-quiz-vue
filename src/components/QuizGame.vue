@@ -13,18 +13,24 @@
           :src="currentFlashcard.imageUrl"
         />
         <p class="answer"><span v-if="isShowAnswer">{{ currentFlashcard.vocabulary }}</span></p>
-        <div class="text-center">
-          <button
+        <div class="quiz-buttons"
+          :class="{
+            'quiz-buttons-extra': settings.level === 'extra',
+            'quiz-buttons-standard': settings.level === 'standard',
+          }"
+        >
+          <div
             v-for="flashcard in currentQuestionFlashcards"
-            :key="flashcard.vocabulary"
-            v-on:click="processAnswer(flashcard.vocabulary)"
-            :class="{
-              'correct-answer': isShowAnswer && flashcard.vocabulary === this.currentFlashcard.vocabulary,
-              'incorrect-answer': isShowAnswer && flashcard.vocabulary !== this.currentFlashcard.vocabulary
-            }"
+            :key="flashcard.vocabulary" class="quiz-button-item"
           >
-            {{ flashcard.vocabulary }}
-          </button>
+            <QuizButton
+              v-on:click="processAnswer(flashcard.vocabulary)"
+              :correct="isShowAnswer && flashcard.vocabulary === this.currentFlashcard.vocabulary"
+              :incorrect="isShowAnswer && flashcard.vocabulary !== this.currentFlashcard.vocabulary"
+            >
+              {{ flashcard.vocabulary }}
+            </QuizButton>
+          </div>
         </div>
       </div>
       <button class="settings-button" v-on:click="settings.isShowSettings = true">
@@ -41,11 +47,12 @@
 </template>
 
 <script>
+import QuizButton from "./QuizButton.vue";
 import QuizFinished from "./QuizFinished.vue";
 import { shuffle } from "../helpers";
 
 export default {
-  components: { QuizFinished },
+  components: { QuizFinished, QuizButton },
   data() {
     return {
       gameFlashcards: [],
@@ -115,10 +122,19 @@ export default {
 .answer {
   height: 10px;
 }
-.correct-answer {
-  background-color: green
+.quiz-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
 }
-.incorrect-answer {
-  background-color: red
+.quiz-buttons-standard {
+  width: 160px;
+}
+.quiz-buttons-extra {
+  width: 320px;
+}
+.quiz-button-item {
+  width: 152px;
+  margin: 0 4px;
 }
 </style>
