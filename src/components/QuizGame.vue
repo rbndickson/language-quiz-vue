@@ -145,13 +145,13 @@ export default {
   margin: 0 auto;
 }
 .quiz-buttons-standard {
-  width: 160px;
+  width: 200px;
 }
 .quiz-buttons-extra {
-  width: 320px;
+  width: 400px;
 }
 .quiz-button-item {
-  width: 152px;
+  width: 192px;
   margin: 0 4px;
 }
 .quiz-back-button {

@@ -28,7 +28,7 @@ export default {
 .quiz-button-base {
   display: block;
   width: 100%;
-  margin: 4px 0;
+  margin: 3px 0;
   padding: 10px 5px;
   border: solid 4px #bdddf4;
   border-radius: 5px;
