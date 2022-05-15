@@ -4,24 +4,30 @@
       <p class="text-center">Questions:</p>
       <div class="quiz-settings-question-amount text-center">{{ settings.questionAmount }}</div>
       <div class="question-amount-buttons text-center">
-        <button
+        <AppButton
           v-if="flashcards.length >= 5"
           v-on:click="settings.questionAmount = 5"
+          x-small
+          inline
         >
           5
-        </button>
-        <button
+        </AppButton>
+        <AppButton
           v-if="flashcards.length >= 10"
           v-on:click="settings.questionAmount = 10"
+          x-small
+          inline
         >
           10
-        </button>
-        <button
+        </AppButton>
+        <AppButton
           v-if="flashcards.length > 10"
           v-on:click="settings.questionAmount = flashcards.length"
+          x-small
+          inline
         >
           max
-        </button>
+        </AppButton>
       </div>
       <div class="text-center">
         <p>Level:</p>
@@ -53,14 +59,22 @@
         />
       </div>
       <div>
-        <button v-on:click="settings.isShowSettings = false">Start!</button>
+        <AppButton
+          v-on:click="settings.isShowSettings = false"
+          green
+        >
+          Start!
+        </AppButton>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import AppButton from "./AppButton"
+
 export default {
+  components: { AppButton },
   inject: [
     "settings",
     "languageVariety",

@@ -121,6 +121,4 @@ export default {
 .incorrect-answer {
   background-color: red
 }
-.settings-button {
-}
 </style>

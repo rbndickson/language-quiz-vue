@@ -4,8 +4,18 @@
     <p>You scored {{ score }} out of {{ settings.questionAmount }}</p>
     <br />
     <div>
-      <button v-on:click="$emit('playAgain')">Play again</button>
-      <button v-on:click="settings.isShowSettings = true">Settings</button>
+      <AppButton
+        v-on:click="$emit('playAgain')"
+        medium
+      >
+        Play again
+      </AppButton>
+      <AppButton
+        v-on:click="settings.isShowSettings = true"
+        medium
+      >
+        Settings
+      </AppButton>
     </div>
     <br />
     <h3>Review</h3>
@@ -31,7 +41,10 @@
 </template>
 
 <script>
+import AppButton from './AppButton';
+
 export default {
+  components: { AppButton },
   props: ["score", "answerHistory"],
   inject: ["settings"],
 };
