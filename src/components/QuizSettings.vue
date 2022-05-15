@@ -111,6 +111,11 @@ export default {
 .quiz-input {
   margin: 20px 2px 20px 10px;
 }
+.quiz-start-images {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
 .quiz-start-images img {
   height: 90px;
   width: 90px;
