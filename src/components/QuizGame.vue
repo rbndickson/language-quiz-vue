@@ -74,6 +74,7 @@ export default {
   mounted() {
     this.gameFlashcards = shuffle(this.flashcards);
     this.setCurrentQuestionFlashcards();
+    this.preloadQuizImages();
   },
   computed: {
     currentFlashcard() {
@@ -81,6 +82,12 @@ export default {
     },
   },
   methods: {
+    preloadQuizImages() {
+      this.gameFlashcards.forEach(flashcard => {
+        let imageObject = new Image();
+        imageObject.src = flashcard.imageUrl;
+      });
+    },
     setCurrentQuestionFlashcards() {
       const answerAmount = this.settings.level === "standard" ? 3 : 6;
       let filteredFlashcards = this.gameFlashcards.filter(
