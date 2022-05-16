@@ -164,7 +164,7 @@ export default {
 }
 .quiz-button-item {
   width: 192px;
-  margin: 0 4px;
+  margin: 4px;
 }
 .quiz-back-button {
   width: 20px;
