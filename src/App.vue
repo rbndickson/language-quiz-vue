@@ -24,7 +24,7 @@ export default {
     let settings = reactive({
       isShowSettings: true,
       questionAmount: defaultQuestionAmount,
-      level: "standard",
+      level: "normal",
     });
 
     return {

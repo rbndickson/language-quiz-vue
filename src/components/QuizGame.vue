@@ -19,8 +19,8 @@
         <p class="quiz-answer"><span v-if="isShowAnswer">{{ currentFlashcard.vocabulary }}</span></p>
         <div class="quiz-buttons"
           :class="{
-            'quiz-buttons-extra': settings.level === 'extra',
-            'quiz-buttons-standard': settings.level === 'standard',
+            'quiz-buttons-difficult': settings.level === 'difficult',
+            'quiz-buttons-normal': settings.level === 'normal',
           }"
         >
           <div
@@ -89,7 +89,7 @@ export default {
       });
     },
     setCurrentQuestionFlashcards() {
-      const answerAmount = this.settings.level === "standard" ? 3 : 6;
+      const answerAmount = this.settings.level === "normal" ? 3 : 6;
       let nonAnswerFlashcards = this.flashcards.filter(
         flashcard => flashcard.vocabulary !== this.currentFlashcard.vocabulary
       );
@@ -151,10 +151,10 @@ export default {
   flex-wrap: wrap;
   margin: 0 auto;
 }
-.quiz-buttons-standard {
+.quiz-buttons-normal {
   width: 200px;
 }
-.quiz-buttons-extra {
+.quiz-buttons-difficult {
   width: 400px;
 }
 .quiz-button-item {

@@ -32,15 +32,15 @@
       <div class="text-center">
         <div class="quiz-settings-label">Level:</div>
         <input
-          id="standard"
+          id="normal"
           class="quiz-input"
           type="radio"
-          value="standard"
+          value="normal"
           v-model="settings.level"
         />
-        <label htmlFor="standard">Standard</label>
-        <input id="extra" class="quiz-input" type="radio" value="extra" v-model="settings.level" />
-        <label htmlFor="extra">Extra</label>
+        <label htmlFor="normal">Normal</label>
+        <input id="difficult" class="quiz-input" type="radio" value="difficult" v-model="settings.level" />
+        <label htmlFor="difficult">Difficult</label>
       </div>
     </section>
     <section class="pure-u-1 pure-u-md-1-2">
