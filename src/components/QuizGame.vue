@@ -83,7 +83,7 @@ export default {
   },
   methods: {
     preloadQuizImages() {
-      this.gameFlashcards.forEach(flashcard => {
+      this.gameFlashcards.slice(0, this.settings.questionAmount).forEach(flashcard => {
         let imageObject = new Image();
         imageObject.src = flashcard.imageUrl;
       });
