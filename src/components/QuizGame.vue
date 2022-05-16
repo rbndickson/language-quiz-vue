@@ -72,8 +72,7 @@ export default {
   },
   inject: ["flashcards", "settings"],
   mounted() {
-    this.gameFlashcards = [...this.flashcards];
-    shuffle(this.gameFlashcards);
+    this.gameFlashcards = shuffle(this.flashcards);
     this.setCurrentQuestionFlashcards();
   },
   computed: {
@@ -89,7 +88,7 @@ export default {
       );
       let questionFlashcards = filteredFlashcards.slice(0, answerAmount - 1);
       questionFlashcards.push(this.currentFlashcard);
-      shuffle(questionFlashcards);
+      questionFlashcards = shuffle(questionFlashcards);
 
       this.currentQuestionFlashcards = questionFlashcards;
     },
@@ -106,7 +105,9 @@ export default {
         setTimeout(()=>{
           this.isShowAnswer = false;
           this.currentQuestionIndex++;
-          this.setCurrentQuestionFlashcards();
+          if(this.currentQuestionIndex < this.settings.questionAmount) {
+            this.setCurrentQuestionFlashcards();
+          }
         }, 2000)
       }
     },
@@ -114,7 +115,7 @@ export default {
       this.currentQuestionIndex = 0;
       this.score = 0;
       this.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
-      shuffle(this.gameFlashcards);
+      this.gameFlashcards = shuffle(this.flashcards);
       this.setCurrentQuestionFlashcards();
     },
   },
