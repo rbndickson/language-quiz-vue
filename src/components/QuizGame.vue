@@ -72,7 +72,7 @@ export default {
   },
   inject: ["flashcards", "settings"],
   mounted() {
-    this.gameFlashcards = shuffle(this.flashcards);
+    this.gameFlashcards = shuffle(this.flashcards).slice(0, this.settings.questionAmount);
     this.setCurrentQuestionFlashcards();
     this.preloadQuizImages();
   },
@@ -83,21 +83,19 @@ export default {
   },
   methods: {
     preloadQuizImages() {
-      this.gameFlashcards.slice(0, this.settings.questionAmount).forEach(flashcard => {
+      this.gameFlashcards.forEach(flashcard => {
         let imageObject = new Image();
         imageObject.src = flashcard.imageUrl;
       });
     },
     setCurrentQuestionFlashcards() {
       const answerAmount = this.settings.level === "standard" ? 3 : 6;
-      let filteredFlashcards = this.gameFlashcards.filter(
-        (questionFlashcards) => questionFlashcards.vocabulary !== this.currentFlashcard.vocabulary
+      let nonAnswerFlashcards = this.flashcards.filter(
+        flashcard => flashcard.vocabulary !== this.currentFlashcard.vocabulary
       );
-      let questionFlashcards = filteredFlashcards.slice(0, answerAmount - 1);
+      let questionFlashcards = shuffle(nonAnswerFlashcards).slice(0, answerAmount - 1);
       questionFlashcards.push(this.currentFlashcard);
-      questionFlashcards = shuffle(questionFlashcards);
-
-      this.currentQuestionFlashcards = questionFlashcards;
+      this.currentQuestionFlashcards = shuffle(questionFlashcards);
     },
     processAnswer(answer) {
       if(this.isShowAnswer === false) {
@@ -122,7 +120,7 @@ export default {
       this.currentQuestionIndex = 0;
       this.score = 0;
       this.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
-      this.gameFlashcards = shuffle(this.flashcards);
+      this.gameFlashcards = shuffle(this.flashcards).slice(0, this.settings.questionAmount);
       this.setCurrentQuestionFlashcards();
     },
   },
