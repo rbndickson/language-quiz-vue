@@ -157,6 +157,11 @@ export default {
 .quiz-buttons-difficult {
   width: 400px;
 }
+@media (max-width: 480px) {
+  .quiz-buttons-difficult {
+    width: 200px;
+  }
+}
 .quiz-button-item {
   width: 192px;
   margin: 0 4px;

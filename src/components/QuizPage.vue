@@ -26,4 +26,9 @@ export default {
   border-radius: 5px;
   padding: 20px;
 }
+@media (max-width: 480px) {
+  .quiz-page {
+    max-width: 280px;
+  }
+}
 </style>
