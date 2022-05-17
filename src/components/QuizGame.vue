@@ -37,12 +37,9 @@
           </div>
         </div>
       </div>
-      <button
-        src="https://twemoji.maxcdn.com/2/svg/1f519.svg"
-        alt="Back button"
-        class="quiz-back-button"
-        v-on:click="settings.isShowSettings = true"
-      />
+      <button class="quiz-back-button" v-on:click="settings.isShowSettings = true">
+        <img alt="back to settings" src='https://twemoji.maxcdn.com/2/svg/1f519.svg' height=20 width=20 />
+      </button>
     </div>
     <QuizFinished
       v-else
@@ -169,8 +166,10 @@ export default {
 .quiz-back-button {
   width: 20px;
   height: 20px;
+  margin: 0;
+  padding: 0;
   border: none;
-  background: url('https://twemoji.maxcdn.com/2/svg/1f519.svg');
+  background: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   -webkit-animation: all 0.2s linear infinite;
