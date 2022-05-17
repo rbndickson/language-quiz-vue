@@ -16,7 +16,7 @@
           class="quiz-image"
           :src="currentFlashcard.imageUrl"
         />
-        <p class="quiz-answer"><span v-if="isShowAnswer">{{ currentFlashcard.vocabulary }}</span></p>
+        <p class="quiz-answer"><span v-if="isShowAnswer"><b>{{ currentFlashcard.vocabulary }}</b></span></p>
         <div class="quiz-buttons"
           :class="{
             'quiz-buttons-difficult': settings.level === 'difficult',
