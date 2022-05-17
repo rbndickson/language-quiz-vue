@@ -28,7 +28,8 @@ export default {
 }
 @media (max-width: 480px) {
   .quiz-page {
-    max-width: 280px;
+    max-width: 320px;
+    margin: 20px auto 20px auto;
   }
 }
 </style>
