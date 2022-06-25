@@ -11,13 +11,18 @@
       <div v-if="currentFlashcard" class="text-center">
         <img
           v-if="currentFlashcard"
-          height=150
-          width=150
+          height="150"
+          width="150"
           class="quiz-image"
           :src="currentFlashcard.imageUrl"
         />
-        <p class="quiz-answer"><span v-if="isShowAnswer"><b>{{ currentFlashcard.vocabulary }}</b></span></p>
-        <div class="quiz-buttons"
+        <p class="quiz-answer">
+          <span v-if="isShowAnswer"
+            ><b>{{ currentFlashcard.vocabulary }}</b></span
+          >
+        </p>
+        <div
+          class="quiz-buttons"
           :class="{
             'quiz-buttons-difficult': settings.level === 'difficult',
             'quiz-buttons-normal': settings.level === 'normal',
@@ -25,20 +30,35 @@
         >
           <div
             v-for="flashcard in currentQuestionFlashcards"
-            :key="flashcard.vocabulary" class="quiz-button-item"
+            :key="flashcard.vocabulary"
+            class="quiz-button-item"
           >
             <QuizButton
               v-on:click="processAnswer(flashcard.vocabulary)"
-              :correct="isShowAnswer && flashcard.vocabulary === this.currentFlashcard.vocabulary"
-              :incorrect="isShowAnswer && flashcard.vocabulary !== this.currentFlashcard.vocabulary"
+              :correct="
+                isShowAnswer &&
+                flashcard.vocabulary === this.currentFlashcard.vocabulary
+              "
+              :incorrect="
+                isShowAnswer &&
+                flashcard.vocabulary !== this.currentFlashcard.vocabulary
+              "
             >
               {{ flashcard.vocabulary }}
             </QuizButton>
           </div>
         </div>
       </div>
-      <button class="quiz-back-button" v-on:click="settings.isShowSettings = true">
-        <img alt="back to settings" src='https://twemoji.maxcdn.com/2/svg/1f519.svg' height=20 width=20 />
+      <button
+        class="quiz-back-button"
+        v-on:click="settings.isShowSettings = true"
+      >
+        <img
+          alt="back to settings"
+          src="https://twemoji.maxcdn.com/2/svg/1f519.svg"
+          height="20"
+          width="20"
+        />
       </button>
     </div>
     <QuizFinished
@@ -69,7 +89,10 @@ export default {
   },
   inject: ["flashcards", "settings"],
   mounted() {
-    this.gameFlashcards = shuffle(this.flashcards).slice(0, this.settings.questionAmount);
+    this.gameFlashcards = shuffle(this.flashcards).slice(
+      0,
+      this.settings.questionAmount
+    );
     this.setCurrentQuestionFlashcards();
     this.preloadQuizImages();
   },
@@ -80,7 +103,7 @@ export default {
   },
   methods: {
     preloadQuizImages() {
-      this.gameFlashcards.forEach(flashcard => {
+      this.gameFlashcards.forEach((flashcard) => {
         let imageObject = new Image();
         imageObject.src = flashcard.imageUrl;
       });
@@ -88,14 +111,17 @@ export default {
     setCurrentQuestionFlashcards() {
       const answerAmount = this.settings.level === "normal" ? 3 : 6;
       let nonAnswerFlashcards = this.flashcards.filter(
-        flashcard => flashcard.vocabulary !== this.currentFlashcard.vocabulary
+        (flashcard) => flashcard.vocabulary !== this.currentFlashcard.vocabulary
       );
-      let questionFlashcards = shuffle(nonAnswerFlashcards).slice(0, answerAmount - 1);
+      let questionFlashcards = shuffle(nonAnswerFlashcards).slice(
+        0,
+        answerAmount - 1
+      );
       questionFlashcards.push(this.currentFlashcard);
       this.currentQuestionFlashcards = shuffle(questionFlashcards);
     },
     processAnswer(answer) {
-      if(this.isShowAnswer === false) {
+      if (this.isShowAnswer === false) {
         if (answer === this.currentFlashcard.vocabulary) {
           this.score++;
           this.answerHistory.correctAnswers.push(this.currentFlashcard);
@@ -104,20 +130,23 @@ export default {
         }
 
         this.isShowAnswer = true;
-        setTimeout(()=>{
+        setTimeout(() => {
           this.isShowAnswer = false;
           this.currentQuestionIndex++;
-          if(this.currentQuestionIndex < this.settings.questionAmount) {
+          if (this.currentQuestionIndex < this.settings.questionAmount) {
             this.setCurrentQuestionFlashcards();
           }
-        }, 2000)
+        }, 2000);
       }
     },
     playAgain() {
       this.currentQuestionIndex = 0;
       this.score = 0;
       this.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
-      this.gameFlashcards = shuffle(this.flashcards).slice(0, this.settings.questionAmount);
+      this.gameFlashcards = shuffle(this.flashcards).slice(
+        0,
+        this.settings.questionAmount
+      );
       this.setCurrentQuestionFlashcards();
     },
   },

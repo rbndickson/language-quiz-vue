@@ -4,7 +4,8 @@
     :class="{
       'quiz-button-correct': correct,
       'quiz-button-incorrect': incorrect,
-    }">
+    }"
+  >
     <slot></slot>
   </button>
 </template>
@@ -14,11 +15,11 @@ export default {
   props: {
     correct: {
       type: Boolean,
-      default: false
+      default: false,
     },
     incorrect: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
 };
@@ -44,7 +45,6 @@ export default {
 
 .quiz-button-correct {
   background-color: #d9ffbd;
-
 }
 .quiz-button-correct:hover {
   background-color: #d9ffbd;
@@ -52,7 +52,6 @@ export default {
 
 .quiz-button-incorrect {
   background-color: #ffbdd3;
-
 }
 .quiz-button-incorrect:hover {
   background-color: #ffbdd3;

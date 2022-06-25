@@ -4,16 +4,8 @@
     <h3>You scored {{ score }} out of {{ settings.questionAmount }}</h3>
     <QuizResultImage :score="score"></QuizResultImage>
     <div>
-      <AppButton
-        v-on:click="$emit('playAgain')"
-        medium
-      >
-        Play again
-      </AppButton>
-      <AppButton
-        v-on:click="settings.isShowSettings = true"
-        medium
-      >
+      <AppButton v-on:click="$emit('playAgain')" medium> Play again </AppButton>
+      <AppButton v-on:click="settings.isShowSettings = true" medium>
         Settings
       </AppButton>
     </div>
@@ -26,7 +18,12 @@
         v-for="flashcard in answerHistory.correctAnswers"
         :key="flashcard.vocabulary"
       >
-        <img height=30 width=30 class='quiz-answer-item-emoji' :src="flashcard.imageUrl" />{{ flashcard.vocabulary }}
+        <img
+          height="30"
+          width="30"
+          class="quiz-answer-item-emoji"
+          :src="flashcard.imageUrl"
+        />{{ flashcard.vocabulary }}
       </li>
     </ul>
     <h4>Words you answered incorrectly:</h4>
@@ -36,15 +33,21 @@
         v-for="flashcard in answerHistory.incorrectAnswers"
         :key="flashcard.vocabulary"
       >
-        <img height=30 width=30 class='quiz-answer-item-emoji' :src="flashcard.imageUrl" /> {{ flashcard.vocabulary }}
+        <img
+          height="30"
+          width="30"
+          class="quiz-answer-item-emoji"
+          :src="flashcard.imageUrl"
+        />
+        {{ flashcard.vocabulary }}
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import AppButton from './AppButton';
-import QuizResultImage from './QuizResultImage';
+import AppButton from "./AppButton";
+import QuizResultImage from "./QuizResultImage";
 
 export default {
   components: { AppButton, QuizResultImage },

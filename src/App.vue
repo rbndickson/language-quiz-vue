@@ -19,7 +19,8 @@ export default {
     categoryEmojiCode: { type: String, required: true },
   },
   provide() {
-    const defaultQuestionAmount = this.flashcards.length > 5 ? 5 : this.flashcards.length;
+    const defaultQuestionAmount =
+      this.flashcards.length > 5 ? 5 : this.flashcards.length;
 
     let settings = reactive({
       isShowSettings: true,

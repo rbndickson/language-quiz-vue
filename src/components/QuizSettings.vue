@@ -2,7 +2,9 @@
   <div class="quiz-settings">
     <section class="pure-u-1 pure-u-md-1-2">
       <div class="quiz-settings-label text-center">Questions:</div>
-      <div class="quiz-settings-question-amount text-center">{{ settings.questionAmount }}</div>
+      <div class="quiz-settings-question-amount text-center">
+        {{ settings.questionAmount }}
+      </div>
       <div class="question-amount-buttons text-center">
         <AppButton
           v-if="flashcards.length >= 5"
@@ -39,7 +41,13 @@
           v-model="settings.level"
         />
         <label htmlFor="normal">Normal</label>
-        <input id="difficult" class="quiz-input" type="radio" value="difficult" v-model="settings.level" />
+        <input
+          id="difficult"
+          class="quiz-input"
+          type="radio"
+          value="difficult"
+          v-model="settings.level"
+        />
         <label htmlFor="difficult">Difficult</label>
       </div>
     </section>
@@ -47,22 +55,19 @@
       <div class="quiz-start-images">
         <img
           :src="languageEmojiUrl"
-          height=100
-          width=100
+          height="100"
+          width="100"
           :alt="`${languageVariety} icon`"
         />
         <img
           :src="categoryEmojiUrl"
-          height=100
-          width=100
+          height="100"
+          width="100"
           :alt="`${category} icon`"
         />
       </div>
       <div>
-        <AppButton
-          v-on:click="settings.isShowSettings = false"
-          green
-        >
+        <AppButton v-on:click="settings.isShowSettings = false" green>
           Start!
         </AppButton>
       </div>
@@ -71,7 +76,7 @@
 </template>
 
 <script>
-import AppButton from "./AppButton"
+import AppButton from "./AppButton";
 
 export default {
   components: { AppButton },

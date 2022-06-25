@@ -8,7 +8,8 @@
       'app-button-inline': inline,
       'app-button-blue': blue,
       'app-button-green': green,
-    }">
+    }"
+  >
     <slot></slot>
   </button>
 </template>
@@ -18,27 +19,27 @@ export default {
   props: {
     xSmall: {
       type: Boolean,
-      default: false
+      default: false,
     },
     small: {
       type: Boolean,
-      default: false
+      default: false,
     },
     medium: {
       type: Boolean,
-      default: false
+      default: false,
     },
     inline: {
       type: Boolean,
-      default: false
+      default: false,
     },
     blue: {
       type: Boolean,
-      default: false
+      default: false,
     },
     green: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
 };
@@ -88,10 +89,9 @@ export default {
 .app-button-blue {
   background-color: #a5d6fa;
   border-bottom: 4px solid #55acee;
-
 }
 .app-button-blue:hover {
-background-color: #91cdf8;
+  background-color: #91cdf8;
 }
 
 .app-button-green {
