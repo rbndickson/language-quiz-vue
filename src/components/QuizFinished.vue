@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import AppButton from "./AppButton";
-import QuizResultImage from "./QuizResultImage";
+import AppButton from "./AppButton.vue";
+import QuizResultImage from "./QuizResultImage.vue";
 
 export default {
   components: { AppButton, QuizResultImage },
