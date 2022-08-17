@@ -9,14 +9,15 @@
   },
   "dependencies": {
     "core-js": "^3.23.2",
+    "pinia": "^2.0.18",
     "vue": "^3.2.37"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.3",
     "eslint": "^8.18.0",
     "eslint-plugin-vue": "^9.1.1",
     "prettier-eslint": "^15.0.1",
-    "vite": "^3.0.7",
-    "@vitejs/plugin-vue": "^3.0.3"
+    "vite": "^3.0.7"
   },
   "eslintConfig": {
     "root": true,
