@@ -57,13 +57,13 @@
           :src="languageEmojiUrl"
           height="100"
           width="100"
-          :alt="`${languageVariety} icon`"
+          :alt="`${languageVariety.name} icon`"
         />
         <img
           :src="categoryEmojiUrl"
           height="100"
           width="100"
-          :alt="`${category} icon`"
+          :alt="`${category.name} icon`"
         />
       </div>
       <div>
@@ -76,24 +76,20 @@
 </template>
 
 <script>
+import { mapState } from "pinia";
+import { useQuizStore } from "../store/quiz";
 import AppButton from "./AppButton.vue";
 
 export default {
   components: { AppButton },
-  inject: [
-    "settings",
-    "languageVariety",
-    "category",
-    "languageVarietyEmojiCode",
-    "categoryEmojiCode",
-    "flashcards",
-  ],
+  inject: ["settings"],
   computed: {
+    ...mapState(useQuizStore, ["languageVariety", "category", "flashcards"]),
     languageEmojiUrl() {
-      return `https://twemoji.maxcdn.com/2/svg/${this.languageVarietyEmojiCode}.svg`;
+      return `https://twemoji.maxcdn.com/2/svg/${this.languageVariety.emojiCode}.svg`;
     },
     categoryEmojiUrl() {
-      return `https://twemoji.maxcdn.com/2/svg/${this.categoryEmojiCode}.svg`;
+      return `https://twemoji.maxcdn.com/2/svg/${this.category.emojiCode}.svg`;
     },
   },
 };

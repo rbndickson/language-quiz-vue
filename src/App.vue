@@ -5,6 +5,7 @@
 <script>
 import QuizPage from "./components/QuizPage.vue";
 import { reactive } from "vue";
+import { useQuizStore } from "./store/quiz";
 
 export default {
   name: "App",
@@ -18,6 +19,17 @@ export default {
     languageVarietyEmojiCode: { type: String, required: true },
     categoryEmojiCode: { type: String, required: true },
   },
+  mounted() {
+    const quizStore = useQuizStore();
+
+    quizStore.setInitialData({
+      category: this.category,
+      categoryEmojiCode: this.categoryEmojiCode,
+      languageVariety: this.languageVariety,
+      languageVarietyEmojiCode: this.languageVarietyEmojiCode,
+      flashcards: this.flashcards,
+    });
+  },
   provide() {
     const defaultQuestionAmount =
       this.flashcards.length > 5 ? 5 : this.flashcards.length;
@@ -29,11 +41,6 @@ export default {
     });
 
     return {
-      languageVariety: this.languageVariety,
-      category: this.category,
-      languageVarietyEmojiCode: this.languageVarietyEmojiCode,
-      categoryEmojiCode: this.categoryEmojiCode,
-      flashcards: this.flashcards,
       settings,
     };
   },

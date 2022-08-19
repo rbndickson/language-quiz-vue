@@ -1,19 +1,26 @@
 <template>
   <div class="quiz-page">
-    <h1 class="text-center">{{ languageVariety }} {{ category }} Quiz</h1>
+    <h1 class="text-center">
+      {{ languageVariety.name }} {{ category.name }} Quiz
+    </h1>
     <QuizSettings v-if="settings.isShowSettings" />
     <QuizGame v-else />
   </div>
 </template>
 
 <script>
+import { mapState } from "pinia";
+import { useQuizStore } from "../store/quiz";
 import QuizSettings from "./QuizSettings.vue";
 import QuizGame from "./QuizGame.vue";
 
 export default {
   name: "QuizPage",
   components: { QuizSettings, QuizGame },
-  inject: ["category", "languageVariety", "settings"],
+  inject: ["settings"],
+  computed: {
+    ...mapState(useQuizStore, ["languageVariety", "category"]),
+  },
 };
 </script>
 

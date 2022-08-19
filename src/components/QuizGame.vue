@@ -71,6 +71,8 @@
 </template>
 
 <script>
+import { mapState } from "pinia";
+import { useQuizStore } from "../store/quiz";
 import QuizButton from "./QuizButton.vue";
 import QuizFinished from "./QuizFinished.vue";
 import { shuffle } from "../helpers";
@@ -87,7 +89,7 @@ export default {
       answerHistory: { correctAnswers: [], incorrectAnswers: [] },
     };
   },
-  inject: ["flashcards", "settings"],
+  inject: ["settings"],
   mounted() {
     this.gameFlashcards = shuffle(this.flashcards).slice(
       0,
@@ -97,6 +99,7 @@ export default {
     this.preloadQuizImages();
   },
   computed: {
+    ...mapState(useQuizStore, ["flashcards"]),
     currentFlashcard() {
       return this.gameFlashcards[this.currentQuestionIndex];
     },
