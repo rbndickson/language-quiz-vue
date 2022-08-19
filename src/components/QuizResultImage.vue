@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { mapState } from "pinia";
+import { useQuizStore } from "../store/quiz";
 import { sample } from "../helpers";
 
 export default {
@@ -17,7 +19,9 @@ export default {
       type: Number,
     },
   },
-  inject: ["settings"],
+  computed: {
+    ...mapState(useQuizStore, ["questionAmount"]),
+  },
   methods: {
     generateImageLink() {
       const oneHundredEmojiCode = "1f4af",
@@ -39,7 +43,7 @@ export default {
         studyTime: [seedlingEmojiCode, booksEmojiCode],
       };
 
-      const scorePercentage = (this.score / this.settings.questionAmount) * 100;
+      const scorePercentage = (this.score / this.questionAmount) * 100;
 
       let resultEmojiCode;
 

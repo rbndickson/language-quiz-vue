@@ -1,10 +1,10 @@
 <template lang="">
   <div>
-    <div v-if="currentQuestionIndex < settings.questionAmount">
+    <div v-if="currentQuestionIndex < questionAmount">
       <header class="quiz-header">
         <p class="text-center">
           Question: {{ currentQuestionIndex + 1 }} of
-          {{ settings.questionAmount }}
+          {{ questionAmount }}
         </p>
         <p class="text-center">Score: {{ score }}</p>
       </header>
@@ -93,13 +93,18 @@ export default {
   mounted() {
     this.gameFlashcards = shuffle(this.flashcards).slice(
       0,
-      this.settings.questionAmount
+      this.questionAmount
     );
     this.setCurrentQuestionFlashcards();
     this.preloadQuizImages();
   },
   computed: {
-    ...mapState(useQuizStore, ["flashcards", "level", "answerChoiceAmount"]),
+    ...mapState(useQuizStore, [
+      "flashcards",
+      "level",
+      "answerChoiceAmount",
+      "questionAmount",
+    ]),
     currentFlashcard() {
       return this.gameFlashcards[this.currentQuestionIndex];
     },
@@ -135,7 +140,7 @@ export default {
         setTimeout(() => {
           this.isShowAnswer = false;
           this.currentQuestionIndex++;
-          if (this.currentQuestionIndex < this.settings.questionAmount) {
+          if (this.currentQuestionIndex < this.questionAmount) {
             this.setCurrentQuestionFlashcards();
           }
         }, 2000);
@@ -147,7 +152,7 @@ export default {
       this.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
       this.gameFlashcards = shuffle(this.flashcards).slice(
         0,
-        this.settings.questionAmount
+        this.questionAmount
       );
       this.setCurrentQuestionFlashcards();
     },

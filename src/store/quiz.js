@@ -6,6 +6,7 @@ export const useQuizStore = defineStore("quiz", {
       category: { name: "", emojiCode: "" },
       languageVariety: { name: "", emojiCode: "" },
       flashcards: [],
+      questionAmount: 0,
       level: "normal",
     };
   },
@@ -21,6 +22,9 @@ export const useQuizStore = defineStore("quiz", {
       this.languageVariety.name = data.languageVariety;
       this.languageVariety.emojiCode = data.languageVarietyEmojiCode;
       this.flashcards = data.flashcards;
+
+      this.questionAmount =
+        data.flashcards.length > 5 ? 5 : data.flashcards.length;
     },
   },
 });

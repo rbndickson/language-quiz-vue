@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <h2>Finished!</h2>
-    <h3>You scored {{ score }} out of {{ settings.questionAmount }}</h3>
+    <h3>You scored {{ score }} out of {{ questionAmount }}</h3>
     <QuizResultImage :score="score"></QuizResultImage>
     <div>
       <AppButton v-on:click="$emit('playAgain')" medium> Play again </AppButton>
@@ -46,13 +46,17 @@
 </template>
 
 <script>
+import { mapState } from "pinia";
+import { useQuizStore } from "../store/quiz";
 import AppButton from "./AppButton.vue";
 import QuizResultImage from "./QuizResultImage.vue";
 
 export default {
   components: { AppButton, QuizResultImage },
   props: ["score", "answerHistory"],
-  inject: ["settings"],
+  computed: {
+    ...mapState(useQuizStore, ["questionAmount"]),
+  },
 };
 </script>
 

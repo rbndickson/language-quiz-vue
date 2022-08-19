@@ -31,12 +31,8 @@ export default {
     });
   },
   provide() {
-    const defaultQuestionAmount =
-      this.flashcards.length > 5 ? 5 : this.flashcards.length;
-
     let settings = reactive({
       isShowSettings: true,
-      questionAmount: defaultQuestionAmount,
     });
 
     return {

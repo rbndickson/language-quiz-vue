@@ -3,12 +3,12 @@
     <section class="pure-u-1 pure-u-md-1-2">
       <div class="quiz-settings-label text-center">Questions:</div>
       <div class="quiz-settings-question-amount text-center">
-        {{ settings.questionAmount }}
+        {{ questionAmount }}
       </div>
       <div class="question-amount-buttons text-center">
         <AppButton
           v-if="flashcards.length >= 5"
-          v-on:click="settings.questionAmount = 5"
+          v-on:click="questionAmount = 5"
           x-small
           inline
         >
@@ -16,7 +16,7 @@
         </AppButton>
         <AppButton
           v-if="flashcards.length >= 10"
-          v-on:click="settings.questionAmount = 10"
+          v-on:click="questionAmount = 10"
           x-small
           inline
         >
@@ -24,7 +24,7 @@
         </AppButton>
         <AppButton
           v-if="flashcards.length > 10"
-          v-on:click="settings.questionAmount = flashcards.length"
+          v-on:click="questionAmount = flashcards.length"
           x-small
           inline
         >
@@ -85,7 +85,7 @@ export default {
   inject: ["settings"],
   computed: {
     ...mapState(useQuizStore, ["languageVariety", "category", "flashcards"]),
-    ...mapWritableState(useQuizStore, ["level"]),
+    ...mapWritableState(useQuizStore, ["level", "questionAmount"]),
     languageEmojiUrl() {
       return `https://twemoji.maxcdn.com/2/svg/${this.languageVariety.emojiCode}.svg`;
     },
