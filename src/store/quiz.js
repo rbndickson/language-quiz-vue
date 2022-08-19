@@ -6,6 +6,7 @@ export const useQuizStore = defineStore("quiz", {
       category: { name: "", emojiCode: "" },
       languageVariety: { name: "", emojiCode: "" },
       flashcards: [],
+      isShowSettings: true,
       questionAmount: 0,
       level: "normal",
     };

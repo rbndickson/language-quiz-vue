@@ -4,7 +4,6 @@
 
 <script>
 import QuizPage from "./components/QuizPage.vue";
-import { reactive } from "vue";
 import { useQuizStore } from "./store/quiz";
 
 export default {
@@ -29,15 +28,6 @@ export default {
       languageVarietyEmojiCode: this.languageVarietyEmojiCode,
       flashcards: this.flashcards,
     });
-  },
-  provide() {
-    let settings = reactive({
-      isShowSettings: true,
-    });
-
-    return {
-      settings,
-    };
   },
 };
 </script>

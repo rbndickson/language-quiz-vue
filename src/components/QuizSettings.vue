@@ -67,7 +67,7 @@
         />
       </div>
       <div>
-        <AppButton v-on:click="settings.isShowSettings = false" green>
+        <AppButton v-on:click="isShowSettings = false" green>
           Start!
         </AppButton>
       </div>
@@ -82,10 +82,13 @@ import AppButton from "./AppButton.vue";
 
 export default {
   components: { AppButton },
-  inject: ["settings"],
   computed: {
     ...mapState(useQuizStore, ["languageVariety", "category", "flashcards"]),
-    ...mapWritableState(useQuizStore, ["level", "questionAmount"]),
+    ...mapWritableState(useQuizStore, [
+      "level",
+      "questionAmount",
+      "isShowSettings",
+    ]),
     languageEmojiUrl() {
       return `https://twemoji.maxcdn.com/2/svg/${this.languageVariety.emojiCode}.svg`;
     },

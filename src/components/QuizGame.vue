@@ -49,10 +49,7 @@
           </div>
         </div>
       </div>
-      <button
-        class="quiz-back-button"
-        v-on:click="settings.isShowSettings = true"
-      >
+      <button class="quiz-back-button" v-on:click="isShowSettings = true">
         <img
           alt="back to settings"
           src="https://twemoji.maxcdn.com/2/svg/1f519.svg"
@@ -71,7 +68,7 @@
 </template>
 
 <script>
-import { mapState } from "pinia";
+import { mapState, mapWritableState } from "pinia";
 import { useQuizStore } from "../store/quiz";
 import QuizButton from "./QuizButton.vue";
 import QuizFinished from "./QuizFinished.vue";
@@ -89,7 +86,6 @@ export default {
       answerHistory: { correctAnswers: [], incorrectAnswers: [] },
     };
   },
-  inject: ["settings"],
   mounted() {
     this.gameFlashcards = shuffle(this.flashcards).slice(
       0,
@@ -105,6 +101,7 @@ export default {
       "answerChoiceAmount",
       "questionAmount",
     ]),
+    ...mapWritableState(useQuizStore, ["isShowSettings"]),
     currentFlashcard() {
       return this.gameFlashcards[this.currentQuestionIndex];
     },

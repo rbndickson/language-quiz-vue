@@ -3,7 +3,7 @@
     <h1 class="text-center">
       {{ languageVariety.name }} {{ category.name }} Quiz
     </h1>
-    <QuizSettings v-if="settings.isShowSettings" />
+    <QuizSettings v-if="isShowSettings" />
     <QuizGame v-else />
   </div>
 </template>
@@ -17,9 +17,12 @@ import QuizGame from "./QuizGame.vue";
 export default {
   name: "QuizPage",
   components: { QuizSettings, QuizGame },
-  inject: ["settings"],
   computed: {
-    ...mapState(useQuizStore, ["languageVariety", "category"]),
+    ...mapState(useQuizStore, [
+      "languageVariety",
+      "category",
+      "isShowSettings",
+    ]),
   },
 };
 </script>
