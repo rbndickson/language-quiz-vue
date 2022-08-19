@@ -38,7 +38,7 @@
           class="quiz-input"
           type="radio"
           value="normal"
-          v-model="settings.level"
+          v-model="level"
         />
         <label htmlFor="normal">Normal</label>
         <input
@@ -46,7 +46,7 @@
           class="quiz-input"
           type="radio"
           value="difficult"
-          v-model="settings.level"
+          v-model="level"
         />
         <label htmlFor="difficult">Difficult</label>
       </div>
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { mapState } from "pinia";
+import { mapState, mapWritableState } from "pinia";
 import { useQuizStore } from "../store/quiz";
 import AppButton from "./AppButton.vue";
 
@@ -85,6 +85,7 @@ export default {
   inject: ["settings"],
   computed: {
     ...mapState(useQuizStore, ["languageVariety", "category", "flashcards"]),
+    ...mapWritableState(useQuizStore, ["level"]),
     languageEmojiUrl() {
       return `https://twemoji.maxcdn.com/2/svg/${this.languageVariety.emojiCode}.svg`;
     },

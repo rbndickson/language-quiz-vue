@@ -6,7 +6,13 @@ export const useQuizStore = defineStore("quiz", {
       category: { name: "", emojiCode: "" },
       languageVariety: { name: "", emojiCode: "" },
       flashcards: [],
+      level: "normal",
     };
+  },
+  getters: {
+    answerChoiceAmount() {
+      return this.level === "normal" ? 3 : 6;
+    },
   },
   actions: {
     setInitialData(data) {

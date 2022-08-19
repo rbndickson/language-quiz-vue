@@ -24,8 +24,8 @@
         <div
           class="quiz-buttons"
           :class="{
-            'quiz-buttons-difficult': settings.level === 'difficult',
-            'quiz-buttons-normal': settings.level === 'normal',
+            'quiz-buttons-difficult': level === 'difficult',
+            'quiz-buttons-normal': level === 'normal',
           }"
         >
           <div
@@ -99,7 +99,7 @@ export default {
     this.preloadQuizImages();
   },
   computed: {
-    ...mapState(useQuizStore, ["flashcards"]),
+    ...mapState(useQuizStore, ["flashcards", "level", "answerChoiceAmount"]),
     currentFlashcard() {
       return this.gameFlashcards[this.currentQuestionIndex];
     },
@@ -112,13 +112,12 @@ export default {
       });
     },
     setCurrentQuestionFlashcards() {
-      const answerAmount = this.settings.level === "normal" ? 3 : 6;
       let nonAnswerFlashcards = this.flashcards.filter(
         (flashcard) => flashcard.vocabulary !== this.currentFlashcard.vocabulary
       );
       let questionFlashcards = shuffle(nonAnswerFlashcards).slice(
         0,
-        answerAmount - 1
+        this.answerChoiceAmount - 1
       );
       questionFlashcards.push(this.currentFlashcard);
       this.currentQuestionFlashcards = shuffle(questionFlashcards);
