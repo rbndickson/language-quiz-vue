@@ -1,10 +1,10 @@
 <template lang="">
   <div>
-    <div v-if="currentQuestionIndex < questionAmount">
+    <div v-if="currentQuestionIndex < settings.questionAmount">
       <header class="quiz-header">
         <p class="text-center">
           Question: {{ currentQuestionIndex + 1 }} of
-          {{ questionAmount }}
+          {{ settings.questionAmount }}
         </p>
         <p class="text-center">Score: {{ score }}</p>
       </header>
@@ -24,8 +24,8 @@
         <div
           class="quiz-buttons"
           :class="{
-            'quiz-buttons-difficult': level === 'difficult',
-            'quiz-buttons-normal': level === 'normal',
+            'quiz-buttons-difficult': settings.level === 'difficult',
+            'quiz-buttons-normal': settings.level === 'normal',
           }"
         >
           <div
@@ -89,18 +89,13 @@ export default {
   mounted() {
     this.gameFlashcards = shuffle(this.flashcards).slice(
       0,
-      this.questionAmount
+      this.settings.questionAmount
     );
     this.setCurrentQuestionFlashcards();
     this.preloadQuizImages();
   },
   computed: {
-    ...mapState(useQuizStore, [
-      "flashcards",
-      "level",
-      "answerChoiceAmount",
-      "questionAmount",
-    ]),
+    ...mapState(useQuizStore, ["flashcards", "settings", "answerChoiceAmount"]),
     ...mapWritableState(useQuizStore, ["isShowSettings"]),
     currentFlashcard() {
       return this.gameFlashcards[this.currentQuestionIndex];
@@ -137,7 +132,7 @@ export default {
         setTimeout(() => {
           this.isShowAnswer = false;
           this.currentQuestionIndex++;
-          if (this.currentQuestionIndex < this.questionAmount) {
+          if (this.currentQuestionIndex < this.settings.questionAmount) {
             this.setCurrentQuestionFlashcards();
           }
         }, 2000);
@@ -149,7 +144,7 @@ export default {
       this.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
       this.gameFlashcards = shuffle(this.flashcards).slice(
         0,
-        this.questionAmount
+        this.settings.questionAmount
       );
       this.setCurrentQuestionFlashcards();
     },

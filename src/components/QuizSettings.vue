@@ -3,12 +3,12 @@
     <section class="pure-u-1 pure-u-md-1-2">
       <div class="quiz-settings-label text-center">Questions:</div>
       <div class="quiz-settings-question-amount text-center">
-        {{ questionAmount }}
+        {{ this.settings.questionAmount }}
       </div>
       <div class="question-amount-buttons text-center">
         <AppButton
           v-if="flashcards.length >= 5"
-          v-on:click="questionAmount = 5"
+          v-on:click="this.settings.questionAmount = 5"
           x-small
           inline
         >
@@ -16,7 +16,7 @@
         </AppButton>
         <AppButton
           v-if="flashcards.length >= 10"
-          v-on:click="questionAmount = 10"
+          v-on:click="this.settings.questionAmount = 10"
           x-small
           inline
         >
@@ -24,7 +24,7 @@
         </AppButton>
         <AppButton
           v-if="flashcards.length > 10"
-          v-on:click="questionAmount = flashcards.length"
+          v-on:click="this.settings.questionAmount = flashcards.length"
           x-small
           inline
         >
@@ -38,7 +38,7 @@
           class="quiz-input"
           type="radio"
           value="normal"
-          v-model="level"
+          v-model="settings.level"
         />
         <label htmlFor="normal">Normal</label>
         <input
@@ -46,7 +46,7 @@
           class="quiz-input"
           type="radio"
           value="difficult"
-          v-model="level"
+          v-model="settings.level"
         />
         <label htmlFor="difficult">Difficult</label>
       </div>
@@ -84,11 +84,7 @@ export default {
   components: { AppButton },
   computed: {
     ...mapState(useQuizStore, ["languageVariety", "category", "flashcards"]),
-    ...mapWritableState(useQuizStore, [
-      "level",
-      "questionAmount",
-      "isShowSettings",
-    ]),
+    ...mapWritableState(useQuizStore, ["settings", "isShowSettings"]),
     languageEmojiUrl() {
       return `https://twemoji.maxcdn.com/2/svg/${this.languageVariety.emojiCode}.svg`;
     },

@@ -7,13 +7,15 @@ export const useQuizStore = defineStore("quiz", {
       languageVariety: { name: "", emojiCode: "" },
       flashcards: [],
       isShowSettings: true,
-      questionAmount: 0,
-      level: "normal",
+      settings: {
+        questionAmount: 0,
+        level: "normal",
+      },
     };
   },
   getters: {
     answerChoiceAmount() {
-      return this.level === "normal" ? 3 : 6;
+      return this.settings.level === "normal" ? 3 : 6;
     },
   },
   actions: {
@@ -24,7 +26,7 @@ export const useQuizStore = defineStore("quiz", {
       this.languageVariety.emojiCode = data.languageVarietyEmojiCode;
       this.flashcards = data.flashcards;
 
-      this.questionAmount =
+      this.settings.questionAmount =
         data.flashcards.length > 5 ? 5 : data.flashcards.length;
     },
   },

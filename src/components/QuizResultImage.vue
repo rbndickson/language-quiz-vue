@@ -20,7 +20,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(useQuizStore, ["questionAmount"]),
+    ...mapState(useQuizStore, ["settings"]),
   },
   methods: {
     generateImageLink() {
@@ -43,7 +43,7 @@ export default {
         studyTime: [seedlingEmojiCode, booksEmojiCode],
       };
 
-      const scorePercentage = (this.score / this.questionAmount) * 100;
+      const scorePercentage = (this.score / this.settings.questionAmount) * 100;
 
       let resultEmojiCode;
 
