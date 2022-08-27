@@ -1,12 +1,12 @@
 <template lang="">
   <div>
-    <div v-if="currentQuestionIndex < settings.questionAmount">
+    <div v-if="game.currentQuestionIndex < settings.questionAmount">
       <header class="quiz-header">
         <p class="text-center">
-          Question: {{ currentQuestionIndex + 1 }} of
+          Question: {{ game.currentQuestionIndex + 1 }} of
           {{ settings.questionAmount }}
         </p>
-        <p class="text-center">Score: {{ score }}</p>
+        <p class="text-center">Score: {{ game.score }}</p>
       </header>
       <div v-if="currentFlashcard" class="text-center">
         <img
@@ -17,7 +17,7 @@
           :src="currentFlashcard.imageUrl"
         />
         <p class="quiz-answer">
-          <span v-if="isShowAnswer"
+          <span v-if="game.isShowAnswer"
             ><b>{{ currentFlashcard.vocabulary }}</b></span
           >
         </p>
@@ -29,18 +29,18 @@
           }"
         >
           <div
-            v-for="flashcard in currentQuestionFlashcards"
+            v-for="flashcard in game.currentQuestionFlashcards"
             :key="flashcard.vocabulary"
             class="quiz-button-item"
           >
             <QuizButton
               v-on:click="processAnswer(flashcard.vocabulary)"
               :correct="
-                isShowAnswer &&
+                game.isShowAnswer &&
                 flashcard.vocabulary === this.currentFlashcard.vocabulary
               "
               :incorrect="
-                isShowAnswer &&
+                game.isShowAnswer &&
                 flashcard.vocabulary !== this.currentFlashcard.vocabulary
               "
             >
@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-      <button class="quiz-back-button" v-on:click="isShowSettings = true">
+      <button class="quiz-back-button" v-on:click="handleBackButton()">
         <img
           alt="back to settings"
           src="https://twemoji.maxcdn.com/2/svg/1f519.svg"
@@ -60,8 +60,8 @@
     </div>
     <QuizFinished
       v-else
-      :score="score"
-      :answer-history="answerHistory"
+      :score="game.score"
+      :answer-history="game.answerHistory"
       @play-again="playAgain"
     />
   </div>
@@ -76,34 +76,20 @@ import { shuffle } from "../helpers";
 
 export default {
   components: { QuizFinished, QuizButton },
-  data() {
-    return {
-      gameFlashcards: [],
-      currentQuestionIndex: 0,
-      currentQuestionFlashcards: [],
-      score: 0,
-      isShowAnswer: false,
-      answerHistory: { correctAnswers: [], incorrectAnswers: [] },
-    };
-  },
   mounted() {
-    this.gameFlashcards = shuffle(this.flashcards).slice(
-      0,
-      this.settings.questionAmount
-    );
-    this.setCurrentQuestionFlashcards();
+    this.resetGame();
     this.preloadQuizImages();
   },
   computed: {
     ...mapState(useQuizStore, ["flashcards", "settings", "answerChoiceAmount"]),
-    ...mapWritableState(useQuizStore, ["isShowSettings"]),
+    ...mapWritableState(useQuizStore, ["game", "isShowSettings"]),
     currentFlashcard() {
-      return this.gameFlashcards[this.currentQuestionIndex];
+      return this.game.flashcards[this.game.currentQuestionIndex];
     },
   },
   methods: {
     preloadQuizImages() {
-      this.gameFlashcards.forEach((flashcard) => {
+      this.game.flashcards.forEach((flashcard) => {
         let imageObject = new Image();
         imageObject.src = flashcard.imageUrl;
       });
@@ -117,36 +103,43 @@ export default {
         this.answerChoiceAmount - 1
       );
       questionFlashcards.push(this.currentFlashcard);
-      this.currentQuestionFlashcards = shuffle(questionFlashcards);
+      this.game.currentQuestionFlashcards = shuffle(questionFlashcards);
     },
     processAnswer(answer) {
-      if (this.isShowAnswer === false) {
+      if (this.game.isShowAnswer === false) {
         if (answer === this.currentFlashcard.vocabulary) {
-          this.score++;
-          this.answerHistory.correctAnswers.push(this.currentFlashcard);
+          this.game.score++;
+          this.game.answerHistory.correctAnswers.push(this.currentFlashcard);
         } else {
-          this.answerHistory.incorrectAnswers.push(this.currentFlashcard);
+          this.game.answerHistory.incorrectAnswers.push(this.currentFlashcard);
         }
 
-        this.isShowAnswer = true;
+        this.game.isShowAnswer = true;
         setTimeout(() => {
-          this.isShowAnswer = false;
-          this.currentQuestionIndex++;
-          if (this.currentQuestionIndex < this.settings.questionAmount) {
+          this.game.isShowAnswer = false;
+          this.game.currentQuestionIndex++;
+          if (this.game.currentQuestionIndex < this.settings.questionAmount) {
             this.setCurrentQuestionFlashcards();
           }
         }, 2000);
       }
     },
-    playAgain() {
-      this.currentQuestionIndex = 0;
-      this.score = 0;
-      this.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
-      this.gameFlashcards = shuffle(this.flashcards).slice(
+    resetGame() {
+      this.game.currentQuestionIndex = 0;
+      this.game.score = 0;
+      this.game.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
+      this.game.flashcards = shuffle(this.flashcards).slice(
         0,
         this.settings.questionAmount
       );
       this.setCurrentQuestionFlashcards();
+    },
+    playAgain() {
+      this.resetGame();
+    },
+    handleBackButton() {
+      this.resetGame();
+      this.isShowSettings = true;
     },
   },
 };

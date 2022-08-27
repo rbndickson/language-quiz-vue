@@ -11,6 +11,14 @@ export const useQuizStore = defineStore("quiz", {
         questionAmount: 0,
         level: "normal",
       },
+      game: {
+        flashcards: [],
+        score: 0,
+        currentQuestionIndex: 0,
+        currentQuestionFlashcards: [],
+        isShowAnswer: false,
+        answerHistory: { correctAnswers: [], incorrectAnswers: [] },
+      },
     };
   },
   getters: {
