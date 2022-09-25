@@ -1,7 +1,10 @@
 import { createApp } from "vue";
+import { createPinia } from "pinia";
 import App from "./App.vue";
 
 import { data } from "./data";
+
+const pinia = createPinia();
 
 const app = createApp(App, {
   flashcards: data.flashcards,
@@ -11,4 +14,5 @@ const app = createApp(App, {
   categoryEmojiCode: data.categoryEmojicode,
 });
 
+app.use(pinia);
 app.mount("#app");

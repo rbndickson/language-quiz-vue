@@ -5,7 +5,7 @@
     <QuizResultImage :score="score"></QuizResultImage>
     <div>
       <AppButton v-on:click="$emit('playAgain')" medium> Play again </AppButton>
-      <AppButton v-on:click="settings.isShowSettings = true" medium>
+      <AppButton v-on:click="isShowSettings = true" medium>
         Settings
       </AppButton>
     </div>
@@ -46,13 +46,18 @@
 </template>
 
 <script>
-import AppButton from "./AppButton";
-import QuizResultImage from "./QuizResultImage";
+import { mapState, mapWritableState } from "pinia";
+import { useQuizStore } from "../store/quiz";
+import AppButton from "./AppButton.vue";
+import QuizResultImage from "./QuizResultImage.vue";
 
 export default {
   components: { AppButton, QuizResultImage },
   props: ["score", "answerHistory"],
-  inject: ["settings"],
+  computed: {
+    ...mapState(useQuizStore, ["settings"]),
+    ...mapWritableState(useQuizStore, ["isShowSettings"]),
+  },
 };
 </script>
 

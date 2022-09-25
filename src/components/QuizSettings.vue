@@ -3,12 +3,12 @@
     <section class="pure-u-1 pure-u-md-1-2">
       <div class="quiz-settings-label text-center">Questions:</div>
       <div class="quiz-settings-question-amount text-center">
-        {{ settings.questionAmount }}
+        {{ this.settings.questionAmount }}
       </div>
       <div class="question-amount-buttons text-center">
         <AppButton
           v-if="flashcards.length >= 5"
-          v-on:click="settings.questionAmount = 5"
+          v-on:click="this.settings.questionAmount = 5"
           x-small
           inline
         >
@@ -16,7 +16,7 @@
         </AppButton>
         <AppButton
           v-if="flashcards.length >= 10"
-          v-on:click="settings.questionAmount = 10"
+          v-on:click="this.settings.questionAmount = 10"
           x-small
           inline
         >
@@ -24,7 +24,7 @@
         </AppButton>
         <AppButton
           v-if="flashcards.length > 10"
-          v-on:click="settings.questionAmount = flashcards.length"
+          v-on:click="this.settings.questionAmount = flashcards.length"
           x-small
           inline
         >
@@ -57,17 +57,17 @@
           :src="languageEmojiUrl"
           height="100"
           width="100"
-          :alt="`${languageVariety} icon`"
+          :alt="`${languageVariety.name} icon`"
         />
         <img
           :src="categoryEmojiUrl"
           height="100"
           width="100"
-          :alt="`${category} icon`"
+          :alt="`${category.name} icon`"
         />
       </div>
       <div>
-        <AppButton v-on:click="settings.isShowSettings = false" green>
+        <AppButton v-on:click="isShowSettings = false" green>
           Start!
         </AppButton>
       </div>
@@ -76,24 +76,20 @@
 </template>
 
 <script>
-import AppButton from "./AppButton";
+import { mapState, mapWritableState } from "pinia";
+import { useQuizStore } from "../store/quiz";
+import AppButton from "./AppButton.vue";
 
 export default {
   components: { AppButton },
-  inject: [
-    "settings",
-    "languageVariety",
-    "category",
-    "languageVarietyEmojiCode",
-    "categoryEmojiCode",
-    "flashcards",
-  ],
   computed: {
+    ...mapState(useQuizStore, ["languageVariety", "category", "flashcards"]),
+    ...mapWritableState(useQuizStore, ["settings", "isShowSettings"]),
     languageEmojiUrl() {
-      return `https://twemoji.maxcdn.com/2/svg/${this.languageVarietyEmojiCode}.svg`;
+      return `https://twemoji.maxcdn.com/2/svg/${this.languageVariety.emojiCode}.svg`;
     },
     categoryEmojiUrl() {
-      return `https://twemoji.maxcdn.com/2/svg/${this.categoryEmojiCode}.svg`;
+      return `https://twemoji.maxcdn.com/2/svg/${this.category.emojiCode}.svg`;
     },
   },
 };

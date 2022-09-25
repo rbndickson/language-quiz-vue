@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { mapState } from "pinia";
+import { useQuizStore } from "../store/quiz";
 import { sample } from "../helpers";
 
 export default {
@@ -17,7 +19,9 @@ export default {
       type: Number,
     },
   },
-  inject: ["settings"],
+  computed: {
+    ...mapState(useQuizStore, ["settings"]),
+  },
   methods: {
     generateImageLink() {
       const oneHundredEmojiCode = "1f4af",
