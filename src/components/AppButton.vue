@@ -1,3 +1,32 @@
+<script setup>
+defineProps({
+  xSmall: {
+    type: Boolean,
+    default: false,
+  },
+  small: {
+    type: Boolean,
+    default: false,
+  },
+  medium: {
+    type: Boolean,
+    default: false,
+  },
+  inline: {
+    type: Boolean,
+    default: false,
+  },
+  blue: {
+    type: Boolean,
+    default: false,
+  },
+  green: {
+    type: Boolean,
+    default: false,
+  },
+});
+</script>
+
 <template>
   <button
     class="app-button-base"
@@ -13,37 +42,6 @@
     <slot></slot>
   </button>
 </template>
-
-<script>
-export default {
-  props: {
-    xSmall: {
-      type: Boolean,
-      default: false,
-    },
-    small: {
-      type: Boolean,
-      default: false,
-    },
-    medium: {
-      type: Boolean,
-      default: false,
-    },
-    inline: {
-      type: Boolean,
-      default: false,
-    },
-    blue: {
-      type: Boolean,
-      default: false,
-    },
-    green: {
-      type: Boolean,
-      default: false,
-    },
-  },
-};
-</script>
 
 <style scoped>
 .app-button-base {
