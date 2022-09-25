@@ -1,36 +1,32 @@
+<script setup>
+import QuizPage from "./components/QuizPage.vue";
+import { useQuizStore } from "./store/quiz";
+import { onMounted } from "vue";
+
+const props = defineProps({
+  flashcards: { type: Array, required: true },
+  languageVariety: { type: String, required: true },
+  category: { type: String, required: true },
+  languageVarietyEmojiCode: { type: String, required: true },
+  categoryEmojiCode: { type: String, required: true },
+});
+
+onMounted(() => {
+  const quizStore = useQuizStore();
+
+  quizStore.setInitialData({
+    category: props.category,
+    categoryEmojiCode: props.categoryEmojiCode,
+    languageVariety: props.languageVariety,
+    languageVarietyEmojiCode: props.languageVarietyEmojiCode,
+    flashcards: props.flashcards,
+  });
+});
+</script>
+
 <template>
   <QuizPage />
 </template>
-
-<script>
-import QuizPage from "./components/QuizPage.vue";
-import { useQuizStore } from "./store/quiz";
-
-export default {
-  name: "App",
-  components: {
-    QuizPage,
-  },
-  props: {
-    flashcards: { type: Array, required: true },
-    languageVariety: { type: String, required: true },
-    category: { type: String, required: true },
-    languageVarietyEmojiCode: { type: String, required: true },
-    categoryEmojiCode: { type: String, required: true },
-  },
-  mounted() {
-    const quizStore = useQuizStore();
-
-    quizStore.setInitialData({
-      category: this.category,
-      categoryEmojiCode: this.categoryEmojiCode,
-      languageVariety: this.languageVariety,
-      languageVarietyEmojiCode: this.languageVarietyEmojiCode,
-      flashcards: this.flashcards,
-    });
-  },
-};
-</script>
 
 <style>
 #app {
