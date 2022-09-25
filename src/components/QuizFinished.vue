@@ -1,3 +1,25 @@
+<script setup>
+import { storeToRefs } from "pinia";
+import { useQuizStore } from "../store/quiz";
+import AppButton from "./AppButton.vue";
+import QuizResultImage from "./QuizResultImage.vue";
+
+defineProps({
+  score: {
+    type: Number,
+    required: true,
+  },
+  answerHistory: {
+    type: Object,
+    required: true,
+  },
+});
+
+const quizStore = useQuizStore();
+
+const { isShowSettings, settings } = storeToRefs(quizStore);
+</script>
+
 <template>
   <div class="text-center">
     <h2>Finished!</h2>
@@ -44,22 +66,6 @@
     </ul>
   </div>
 </template>
-
-<script>
-import { mapState, mapWritableState } from "pinia";
-import { useQuizStore } from "../store/quiz";
-import AppButton from "./AppButton.vue";
-import QuizResultImage from "./QuizResultImage.vue";
-
-export default {
-  components: { AppButton, QuizResultImage },
-  props: ["score", "answerHistory"],
-  computed: {
-    ...mapState(useQuizStore, ["settings"]),
-    ...mapWritableState(useQuizStore, ["isShowSettings"]),
-  },
-};
-</script>
 
 <style scoped>
 .quiz-answer-list-item {
