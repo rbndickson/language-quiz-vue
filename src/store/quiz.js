@@ -25,6 +25,9 @@ export const useQuizStore = defineStore("quiz", {
     answerChoiceAmount() {
       return this.settings.level === "normal" ? 3 : 6;
     },
+    currentFlashcard() {
+      return this.game.flashcards[this.game.currentQuestionIndex];
+    },
   },
   actions: {
     setInitialData(data) {
@@ -36,6 +39,9 @@ export const useQuizStore = defineStore("quiz", {
 
       this.settings.questionAmount =
         data.flashcards.length > 5 ? 5 : data.flashcards.length;
+    },
+    showSettings() {
+      this.isShowSettings = true;
     },
   },
 });
