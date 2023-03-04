@@ -1,3 +1,16 @@
+<script setup>
+defineProps({
+  correct: {
+    type: Boolean,
+    default: false,
+  },
+  incorrect: {
+    type: Boolean,
+    default: false,
+  },
+});
+</script>
+
 <template>
   <button
     class="quiz-button-base"
@@ -9,21 +22,6 @@
     <slot></slot>
   </button>
 </template>
-
-<script>
-export default {
-  props: {
-    correct: {
-      type: Boolean,
-      default: false,
-    },
-    incorrect: {
-      type: Boolean,
-      default: false,
-    },
-  },
-};
-</script>
 
 <style scoped>
 .quiz-button-base {

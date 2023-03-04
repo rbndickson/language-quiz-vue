@@ -1,4 +1,80 @@
-<template lang="">
+<script setup>
+import { onMounted } from "vue";
+import { storeToRefs } from "pinia";
+
+import { shuffle } from "../helpers";
+
+import { useQuizStore } from "../store/quiz";
+import QuizButton from "./QuizButton.vue";
+import QuizFinished from "./QuizFinished.vue";
+
+const quizStore = useQuizStore();
+
+const { currentFlashcard, flashcards, game, settings } = storeToRefs(quizStore);
+
+const { answerChoiceAmount, showSettings } = quizStore;
+
+onMounted(() => {
+  resetGame();
+  preloadQuizImages();
+});
+
+const preloadQuizImages = () => {
+  game.value.flashcards.forEach((flashcard) => {
+    let imageObject = new Image();
+    imageObject.src = flashcard.imageUrl;
+  });
+};
+const setCurrentQuestionFlashcards = () => {
+  let nonAnswerFlashcards = flashcards.value.filter(
+    (flashcard) => flashcard.vocabulary !== currentFlashcard.value.vocabulary
+  );
+  let questionFlashcards = shuffle(nonAnswerFlashcards).slice(
+    0,
+    answerChoiceAmount - 1
+  );
+  questionFlashcards.push(currentFlashcard.value);
+  game.value.currentQuestionFlashcards = shuffle(questionFlashcards);
+};
+const processAnswer = (answer) => {
+  if (game.value.isShowAnswer === false) {
+    if (answer === currentFlashcard.value.vocabulary) {
+      game.value.score++;
+      game.value.answerHistory.correctAnswers.push(currentFlashcard.value);
+    } else {
+      game.value.answerHistory.incorrectAnswers.push(currentFlashcard.value);
+    }
+
+    game.value.isShowAnswer = true;
+    setTimeout(() => {
+      game.value.isShowAnswer = false;
+      game.value.currentQuestionIndex++;
+      if (game.value.currentQuestionIndex < settings.value.questionAmount) {
+        setCurrentQuestionFlashcards();
+      }
+    }, 2000);
+  }
+};
+const resetGame = () => {
+  game.value.currentQuestionIndex = 0;
+  game.value.score = 0;
+  game.value.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
+  game.value.flashcards = shuffle(flashcards.value).slice(
+    0,
+    settings.value.questionAmount
+  );
+  setCurrentQuestionFlashcards();
+};
+const playAgain = () => {
+  resetGame();
+};
+const handleBackButton = () => {
+  resetGame();
+  showSettings();
+};
+</script>
+
+<template>
   <div>
     <div v-if="game.currentQuestionIndex < settings.questionAmount">
       <header class="quiz-header">
@@ -37,11 +113,11 @@
               v-on:click="processAnswer(flashcard.vocabulary)"
               :correct="
                 game.isShowAnswer &&
-                flashcard.vocabulary === this.currentFlashcard.vocabulary
+                flashcard.vocabulary === currentFlashcard.vocabulary
               "
               :incorrect="
                 game.isShowAnswer &&
-                flashcard.vocabulary !== this.currentFlashcard.vocabulary
+                flashcard.vocabulary !== currentFlashcard.vocabulary
               "
             >
               {{ flashcard.vocabulary }}
@@ -66,84 +142,6 @@
     />
   </div>
 </template>
-
-<script>
-import { mapState, mapWritableState } from "pinia";
-import { useQuizStore } from "../store/quiz";
-import QuizButton from "./QuizButton.vue";
-import QuizFinished from "./QuizFinished.vue";
-import { shuffle } from "../helpers";
-
-export default {
-  components: { QuizFinished, QuizButton },
-  mounted() {
-    this.resetGame();
-    this.preloadQuizImages();
-  },
-  computed: {
-    ...mapState(useQuizStore, ["flashcards", "settings", "answerChoiceAmount"]),
-    ...mapWritableState(useQuizStore, ["game", "isShowSettings"]),
-    currentFlashcard() {
-      return this.game.flashcards[this.game.currentQuestionIndex];
-    },
-  },
-  methods: {
-    preloadQuizImages() {
-      this.game.flashcards.forEach((flashcard) => {
-        let imageObject = new Image();
-        imageObject.src = flashcard.imageUrl;
-      });
-    },
-    setCurrentQuestionFlashcards() {
-      let nonAnswerFlashcards = this.flashcards.filter(
-        (flashcard) => flashcard.vocabulary !== this.currentFlashcard.vocabulary
-      );
-      let questionFlashcards = shuffle(nonAnswerFlashcards).slice(
-        0,
-        this.answerChoiceAmount - 1
-      );
-      questionFlashcards.push(this.currentFlashcard);
-      this.game.currentQuestionFlashcards = shuffle(questionFlashcards);
-    },
-    processAnswer(answer) {
-      if (this.game.isShowAnswer === false) {
-        if (answer === this.currentFlashcard.vocabulary) {
-          this.game.score++;
-          this.game.answerHistory.correctAnswers.push(this.currentFlashcard);
-        } else {
-          this.game.answerHistory.incorrectAnswers.push(this.currentFlashcard);
-        }
-
-        this.game.isShowAnswer = true;
-        setTimeout(() => {
-          this.game.isShowAnswer = false;
-          this.game.currentQuestionIndex++;
-          if (this.game.currentQuestionIndex < this.settings.questionAmount) {
-            this.setCurrentQuestionFlashcards();
-          }
-        }, 2000);
-      }
-    },
-    resetGame() {
-      this.game.currentQuestionIndex = 0;
-      this.game.score = 0;
-      this.game.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
-      this.game.flashcards = shuffle(this.flashcards).slice(
-        0,
-        this.settings.questionAmount
-      );
-      this.setCurrentQuestionFlashcards();
-    },
-    playAgain() {
-      this.resetGame();
-    },
-    handleBackButton() {
-      this.resetGame();
-      this.isShowSettings = true;
-    },
-  },
-};
-</script>
 
 <style scoped>
 .quiz-header {

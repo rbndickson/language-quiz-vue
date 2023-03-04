@@ -1,14 +1,34 @@
+<script setup>
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
+import { useQuizStore } from "../store/quiz";
+import AppButton from "./AppButton.vue";
+
+const quizStore = useQuizStore();
+
+const { category, flashcards, isShowSettings, languageVariety, settings } =
+  storeToRefs(quizStore);
+
+const twemojiBaseUrl = "https://twemoji.maxcdn.com/2/svg/";
+const languageEmojiUrl = computed(
+  () => `${twemojiBaseUrl}${languageVariety.value.emojiCode}.svg`
+);
+const categoryEmojiUrl = computed(
+  () => `${twemojiBaseUrl}${category.value.emojiCode}.svg`
+);
+</script>
+
 <template>
   <div class="quiz-settings">
     <section class="pure-u-1 pure-u-md-1-2">
       <div class="quiz-settings-label text-center">Questions:</div>
       <div class="quiz-settings-question-amount text-center">
-        {{ this.settings.questionAmount }}
+        {{ settings.questionAmount }}
       </div>
       <div class="question-amount-buttons text-center">
         <AppButton
           v-if="flashcards.length >= 5"
-          v-on:click="this.settings.questionAmount = 5"
+          v-on:click="settings.questionAmount = 5"
           x-small
           inline
         >
@@ -16,7 +36,7 @@
         </AppButton>
         <AppButton
           v-if="flashcards.length >= 10"
-          v-on:click="this.settings.questionAmount = 10"
+          v-on:click="settings.questionAmount = 10"
           x-small
           inline
         >
@@ -24,7 +44,7 @@
         </AppButton>
         <AppButton
           v-if="flashcards.length > 10"
-          v-on:click="this.settings.questionAmount = flashcards.length"
+          v-on:click="settings.questionAmount = flashcards.length"
           x-small
           inline
         >
@@ -74,26 +94,6 @@
     </section>
   </div>
 </template>
-
-<script>
-import { mapState, mapWritableState } from "pinia";
-import { useQuizStore } from "../store/quiz";
-import AppButton from "./AppButton.vue";
-
-export default {
-  components: { AppButton },
-  computed: {
-    ...mapState(useQuizStore, ["languageVariety", "category", "flashcards"]),
-    ...mapWritableState(useQuizStore, ["settings", "isShowSettings"]),
-    languageEmojiUrl() {
-      return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${this.languageVariety.emojiCode}.svg`;
-    },
-    categoryEmojiUrl() {
-      return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${this.category.emojiCode}.svg`;
-    },
-  },
-};
-</script>
 
 <style scoped>
 .quiz-settings {
