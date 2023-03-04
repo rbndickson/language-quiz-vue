@@ -9,7 +9,8 @@ const quizStore = useQuizStore();
 const { category, flashcards, isShowSettings, languageVariety, settings } =
   storeToRefs(quizStore);
 
-const twemojiBaseUrl = "https://twemoji.maxcdn.com/2/svg/";
+const twemojiBaseUrl =
+  "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/";
 const languageEmojiUrl = computed(
   () => `${twemojiBaseUrl}${languageVariety.value.emojiCode}.svg`
 );
