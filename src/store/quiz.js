@@ -1,47 +1,60 @@
 import { defineStore } from "pinia";
+import { computed, ref } from "vue";
 
-export const useQuizStore = defineStore("quiz", {
-  state: () => {
-    return {
-      category: { name: "", emojiCode: "" },
-      languageVariety: { name: "", emojiCode: "" },
-      flashcards: [],
-      isShowSettings: true,
-      settings: {
-        questionAmount: 0,
-        level: "normal",
-      },
-      game: {
-        flashcards: [],
-        score: 0,
-        currentQuestionIndex: 0,
-        currentQuestionFlashcards: [],
-        isShowAnswer: false,
-        answerHistory: { correctAnswers: [], incorrectAnswers: [] },
-      },
-    };
-  },
-  getters: {
-    answerChoiceAmount() {
-      return this.settings.level === "normal" ? 3 : 6;
-    },
-    currentFlashcard() {
-      return this.game.flashcards[this.game.currentQuestionIndex];
-    },
-  },
-  actions: {
-    setInitialData(data) {
-      this.category.name = data.category;
-      this.category.emojiCode = data.categoryEmojiCode;
-      this.languageVariety.name = data.languageVariety;
-      this.languageVariety.emojiCode = data.languageVarietyEmojiCode;
-      this.flashcards = data.flashcards;
+export const useQuizStore = defineStore("quiz", () => {
+  const category = ref({ name: "", emojiCode: "" });
+  const languageVariety = ref({ name: "", emojiCode: "" });
+  const flashcards = ref([]);
 
-      this.settings.questionAmount =
-        data.flashcards.length > 5 ? 5 : data.flashcards.length;
-    },
-    showSettings() {
-      this.isShowSettings = true;
-    },
-  },
+  const isShowSettings = ref(true);
+  const settings = ref({
+    questionAmount: 0,
+    level: "normal",
+  });
+
+  const game = ref({
+    flashcards: [],
+    score: 0,
+    currentQuestionIndex: 0,
+    currentQuestionFlashcards: [],
+    isShowAnswer: false,
+    answerHistory: { correctAnswers: [], incorrectAnswers: [] },
+  });
+
+  const answerChoiceAmount = computed(() => {
+    return settings.value.level === "normal" ? 3 : 6;
+  });
+
+  const currentFlashcard = computed(() => {
+    return game.value.flashcards[game.value.currentQuestionIndex];
+  });
+
+  function setInitialData(data) {
+    category.value.name = data.category;
+    category.value.emojiCode = data.categoryEmojiCode;
+    languageVariety.value.name = data.languageVariety;
+    languageVariety.value.emojiCode = data.languageVarietyEmojiCode;
+    flashcards.value = data.flashcards;
+
+    settings.value.questionAmount =
+      data.flashcards.length > 5 ? 5 : data.flashcards.length;
+  }
+  function showSettings() {
+    isShowSettings.value = true;
+  }
+
+  return {
+    category,
+    languageVariety,
+    flashcards,
+    isShowSettings,
+    settings,
+    game,
+
+    answerChoiceAmount,
+    currentFlashcard,
+
+    setInitialData,
+    showSettings,
+  };
 });
