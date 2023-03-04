@@ -1,8 +1,18 @@
-export const data = {
+import type { Flashcard } from "./types/flashcard";
+
+export interface ApiData {
+  languageVariety: string;
+  category: string;
+  languageVarietyEmojiCode: string;
+  categoryEmojiCode: string;
+  flashcards: Flashcard[];
+}
+
+export const data: ApiData = {
   languageVariety: "English (UK)",
   category: "Animals",
   languageVarietyEmojiCode: "1f1ec-1f1e7",
-  categoryEmojicode: "1f981",
+  categoryEmojiCode: "1f981",
   flashcards: [
     {
       vocabulary: "bat",

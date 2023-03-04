@@ -1,15 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import QuizPage from "./components/QuizPage.vue";
 import { useQuizStore } from "./store/quiz";
 import { onMounted } from "vue";
 
-const props = defineProps({
-  flashcards: { type: Array, required: true },
-  languageVariety: { type: String, required: true },
-  category: { type: String, required: true },
-  languageVarietyEmojiCode: { type: String, required: true },
-  categoryEmojiCode: { type: String, required: true },
-});
+type Props = {
+  languageVariety: string;
+  category: string;
+  languageVarietyEmojiCode: string;
+  categoryEmojiCode: string;
+  flashcards: { vocabulary: string; imageUrl: string }[];
+};
+
+const props = defineProps<Props>();
 
 onMounted(() => {
   const quizStore = useQuizStore();

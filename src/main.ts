@@ -11,7 +11,7 @@ const app = createApp(App, {
   languageVariety: data.languageVariety,
   category: data.category,
   languageVarietyEmojiCode: data.languageVarietyEmojiCode,
-  categoryEmojiCode: data.categoryEmojicode,
+  categoryEmojiCode: data.categoryEmojiCode,
 });
 
 app.use(pinia);

@@ -21,15 +21,15 @@ onMounted(() => {
 
 const preloadQuizImages = () => {
   game.value.flashcards.forEach((flashcard) => {
-    let imageObject = new Image();
+    const imageObject = new Image();
     imageObject.src = flashcard.imageUrl;
   });
 };
 const setCurrentQuestionFlashcards = () => {
-  let nonAnswerFlashcards = flashcards.value.filter(
+  const nonAnswerFlashcards = flashcards.value.filter(
     (flashcard) => flashcard.vocabulary !== currentFlashcard.value.vocabulary
   );
-  let questionFlashcards = shuffle(nonAnswerFlashcards).slice(
+  const questionFlashcards = shuffle(nonAnswerFlashcards).slice(
     0,
     answerChoiceAmount - 1
   );
