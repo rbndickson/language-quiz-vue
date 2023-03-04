@@ -86,10 +86,10 @@ export default {
     ...mapState(useQuizStore, ["languageVariety", "category", "flashcards"]),
     ...mapWritableState(useQuizStore, ["settings", "isShowSettings"]),
     languageEmojiUrl() {
-      return `https://twemoji.maxcdn.com/2/svg/${this.languageVariety.emojiCode}.svg`;
+      return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${this.languageVariety.emojiCode}.svg`;
     },
     categoryEmojiUrl() {
-      return `https://twemoji.maxcdn.com/2/svg/${this.category.emojiCode}.svg`;
+      return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${this.category.emojiCode}.svg`;
     },
   },
 };

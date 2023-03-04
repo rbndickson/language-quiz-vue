@@ -52,7 +52,7 @@
       <button class="quiz-back-button" v-on:click="handleBackButton()">
         <img
           alt="back to settings"
-          src="https://twemoji.maxcdn.com/2/svg/1f519.svg"
+          src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f519.svg"
           height="20"
           width="20"
         />

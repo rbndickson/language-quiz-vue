@@ -6,59 +6,73 @@ export const data = {
   flashcards: [
     {
       vocabulary: "bat",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f987.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f987.svg",
     },
     {
       vocabulary: "crab",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f980.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f980.svg",
     },
     {
       vocabulary: "shark",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f988.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f988.svg",
     },
     {
       vocabulary: "otter",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f9a6.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f9a6.svg",
     },
     {
       vocabulary: "ant",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f41c.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f41c.svg",
     },
     {
       vocabulary: "boar",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f417.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f417.svg",
     },
     {
       vocabulary: "chicken",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f413.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f413.svg",
     },
     {
       vocabulary: "elephant",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f418.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f418.svg",
     },
     {
       vocabulary: "lizard",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f98e.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f98e.svg",
     },
     {
       vocabulary: "monkey",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f435.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f435.svg",
     },
     {
       vocabulary: "octopus",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f419.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f419.svg",
     },
     {
       vocabulary: "rabbit",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f430.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f430.svg",
     },
     {
       vocabulary: "rhinoceros",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f98f.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f98f.svg",
     },
     {
       vocabulary: "scorpion",
-      imageUrl: "https://twemoji.maxcdn.com/2/svg/1f982.svg",
+      imageUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f982.svg",
     },
   ],
 };

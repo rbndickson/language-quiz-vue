@@ -59,7 +59,7 @@ export default {
         resultEmojiCode = sample(resultEmojiCodes["studyTime"]);
       }
 
-      return `https://twemoji.maxcdn.com/2/svg/${resultEmojiCode}.svg`;
+      return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${resultEmojiCode}.svg`;
     },
   },
 };
