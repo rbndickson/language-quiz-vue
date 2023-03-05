@@ -11,6 +11,7 @@ const quizStore = useQuizStore();
     <h1 class="text-center">
       {{ quizStore.languageVariety.name }} {{ quizStore.category.name }} Quiz
     </h1>
+
     <QuizSettings v-if="quizStore.isShowSettings" />
     <QuizGame v-else />
   </div>
@@ -25,6 +26,7 @@ const quizStore = useQuizStore();
   border-radius: 5px;
   padding: 20px;
 }
+
 @media (max-width: 480px) {
   .quiz-page {
     max-width: 320px;

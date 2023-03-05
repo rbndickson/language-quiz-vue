@@ -25,17 +25,21 @@ const preloadQuizImages = () => {
     imageObject.src = flashcard.imageUrl;
   });
 };
+
 const setCurrentQuestionFlashcards = () => {
   const nonAnswerFlashcards = flashcards.value.filter(
     (flashcard) => flashcard.vocabulary !== currentFlashcard.value.vocabulary
   );
+
   const questionFlashcards = shuffle(nonAnswerFlashcards).slice(
     0,
     answerChoiceAmount - 1
   );
+
   questionFlashcards.push(currentFlashcard.value);
   game.value.currentQuestionFlashcards = shuffle(questionFlashcards);
 };
+
 const processAnswer = (answer: string) => {
   if (game.value.isShowAnswer === false) {
     if (answer === currentFlashcard.value.vocabulary) {
@@ -46,15 +50,18 @@ const processAnswer = (answer: string) => {
     }
 
     game.value.isShowAnswer = true;
+
     setTimeout(() => {
       game.value.isShowAnswer = false;
       game.value.currentQuestionIndex++;
+
       if (game.value.currentQuestionIndex < settings.value.questionAmount) {
         setCurrentQuestionFlashcards();
       }
     }, 2000);
   }
 };
+
 const resetGame = () => {
   game.value.currentQuestionIndex = 0;
   game.value.score = 0;
@@ -65,9 +72,11 @@ const resetGame = () => {
   );
   setCurrentQuestionFlashcards();
 };
+
 const playAgain = () => {
   resetGame();
 };
+
 const handleBackButton = () => {
   resetGame();
   showSettings();
@@ -84,6 +93,7 @@ const handleBackButton = () => {
         </p>
         <p class="text-center">Score: {{ game.score }}</p>
       </header>
+
       <div v-if="currentFlashcard" class="text-center">
         <img
           v-if="currentFlashcard"
@@ -92,11 +102,13 @@ const handleBackButton = () => {
           class="quiz-image"
           :src="currentFlashcard.imageUrl"
         />
+
         <p class="quiz-answer">
           <span v-if="game.isShowAnswer"
             ><b>{{ currentFlashcard.vocabulary }}</b></span
           >
         </p>
+
         <div
           class="quiz-buttons"
           :class="{
@@ -125,6 +137,7 @@ const handleBackButton = () => {
           </div>
         </div>
       </div>
+
       <button class="quiz-back-button" @click="handleBackButton()">
         <img
           alt="back to settings"
@@ -134,6 +147,7 @@ const handleBackButton = () => {
         />
       </button>
     </div>
+
     <QuizFinished
       v-else
       :score="game.score"
@@ -151,37 +165,46 @@ const handleBackButton = () => {
   max-width: 500px;
   margin: 0 auto;
 }
+
 @media (max-width: 480px) {
   .quiz-header {
     font-size: 20px;
   }
 }
+
 .quiz-image {
   margin: 20px auto;
 }
+
 .quiz-answer {
   height: 10px;
 }
+
 .quiz-buttons {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
 }
+
 .quiz-buttons-normal {
   width: 200px;
 }
+
 .quiz-buttons-difficult {
   width: 400px;
 }
+
 @media (max-width: 480px) {
   .quiz-buttons-difficult {
     width: 200px;
   }
 }
+
 .quiz-button-item {
   width: 192px;
   margin: 4px;
 }
+
 .quiz-back-button {
   width: 20px;
   height: 20px;
@@ -193,6 +216,7 @@ const handleBackButton = () => {
   transition: all 0.2s ease-in-out;
   -webkit-animation: all 0.2s linear infinite;
 }
+
 .quiz-back-button:hover {
   margin-left: -2px;
 }
