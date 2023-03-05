@@ -1,4 +1,4 @@
-export function shuffle(array) {
+export function shuffle<T>(array: T[]): T[] {
   // ref: https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 
   const newArray = [...array];
@@ -11,6 +11,6 @@ export function shuffle(array) {
   return newArray;
 }
 
-export function sample(array) {
+export function sample<T>(array: T[]): T {
   return array[Math.floor(Math.random() * array.length)];
 }
