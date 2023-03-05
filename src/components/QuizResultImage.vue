@@ -4,15 +4,9 @@ import { useQuizStore } from "../store/quiz";
 
 import { sample, emojiSvgUrl } from "../helpers";
 
-type Props = {
-  score: number;
-};
-
-const props = defineProps<Props>();
-
 const quizStore = useQuizStore();
 
-const { settings } = storeToRefs(quizStore);
+const { game, settings } = storeToRefs(quizStore);
 
 const generateImageLink = () => {
   const oneHundredEmojiCode = "1f4af",
@@ -34,7 +28,8 @@ const generateImageLink = () => {
     studyTime: [seedlingEmojiCode, booksEmojiCode],
   };
 
-  const scorePercentage = (props.score / settings.value.questionAmount) * 100;
+  const scorePercentage =
+    (game.value.score / settings.value.questionAmount) * 100;
 
   let resultEmojiCode;
 

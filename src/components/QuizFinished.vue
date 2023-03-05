@@ -4,25 +4,16 @@ import { useQuizStore } from "../store/quiz";
 import AppButton from "./AppButton.vue";
 import QuizResultImage from "./QuizResultImage.vue";
 
-import type { AnswerHistory } from "@/store/quiz";
-
-type Props = {
-  score: number;
-  answerHistory: AnswerHistory;
-};
-
-defineProps<Props>();
-
 const quizStore = useQuizStore();
 
-const { isShowSettings, settings } = storeToRefs(quizStore);
+const { game, isShowSettings, settings } = storeToRefs(quizStore);
 </script>
 
 <template>
   <div class="text-center">
     <h2>Finished!</h2>
-    <h3>You scored {{ score }} out of {{ settings.questionAmount }}</h3>
-    <QuizResultImage :score="score"></QuizResultImage>
+    <h3>You scored {{ game.score }} out of {{ settings.questionAmount }}</h3>
+    <QuizResultImage :score="game.score"></QuizResultImage>
     <div>
       <AppButton @click="$emit('playAgain')" medium> Play again </AppButton>
       <AppButton @click="isShowSettings = true" medium> Settings </AppButton>
@@ -33,7 +24,7 @@ const { isShowSettings, settings } = storeToRefs(quizStore);
     <ul>
       <li
         class="quiz-answer-list-item"
-        v-for="flashcard in answerHistory.correctAnswers"
+        v-for="flashcard in game.answerHistory.correctAnswers"
         :key="flashcard.vocabulary"
       >
         <img
@@ -48,7 +39,7 @@ const { isShowSettings, settings } = storeToRefs(quizStore);
     <ul class="quiz-answer-list">
       <li
         class="quiz-answer-list-item"
-        v-for="flashcard in answerHistory.incorrectAnswers"
+        v-for="flashcard in game.answerHistory.incorrectAnswers"
         :key="flashcard.vocabulary"
       >
         <img
