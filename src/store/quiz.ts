@@ -38,7 +38,7 @@ export const useQuizStore = defineStore("quiz", () => {
   const settings: Ref<Settings> = ref(initialSettings);
 
   const game: Ref<Game> = ref({
-    flashcards: [] as Flashcard[],
+    flashcards: [],
     score: 0,
     currentQuestionIndex: 0,
     currentQuestionFlashcards: [],
@@ -64,7 +64,15 @@ export const useQuizStore = defineStore("quiz", () => {
     settings.value.questionAmount =
       data.flashcards.length > 5 ? 5 : data.flashcards.length;
   }
-  function showSettings() {
+
+  function resetGame() {
+    game.value.currentQuestionIndex = 0;
+    game.value.score = 0;
+    game.value.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
+    game.value.flashcards = [];
+  }
+
+  function showSettingsScreen() {
     isShowSettings.value = true;
   }
 
@@ -80,6 +88,7 @@ export const useQuizStore = defineStore("quiz", () => {
     currentFlashcard,
 
     setInitialData,
-    showSettings,
+    resetGame,
+    showSettingsScreen,
   };
 });

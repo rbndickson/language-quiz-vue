@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useQuizStore } from "../store/quiz";
 
@@ -12,11 +12,15 @@ const quizStore = useQuizStore();
 
 const { currentFlashcard, flashcards, game, settings } = storeToRefs(quizStore);
 
-const { answerChoiceAmount, showSettings } = quizStore;
+const { answerChoiceAmount, showSettingsScreen, resetGame } = quizStore;
 
 onMounted(() => {
-  resetGame();
+  initalGameSetup();
   preloadQuizImages();
+});
+
+onUnmounted(() => {
+  resetGame();
 });
 
 const preloadQuizImages = () => {
@@ -24,6 +28,14 @@ const preloadQuizImages = () => {
     const imageObject = new Image();
     imageObject.src = flashcard.imageUrl;
   });
+};
+
+const initalGameSetup = () => {
+  game.value.flashcards = shuffle(flashcards.value).slice(
+    0,
+    settings.value.questionAmount
+  );
+  setCurrentQuestionFlashcards();
 };
 
 const setCurrentQuestionFlashcards = () => {
@@ -41,45 +53,30 @@ const setCurrentQuestionFlashcards = () => {
 };
 
 const processAnswer = (answer: string) => {
-  if (game.value.isShowAnswer === false) {
-    if (answer === currentFlashcard.value.vocabulary) {
-      game.value.score++;
-      game.value.answerHistory.correctAnswers.push(currentFlashcard.value);
-    } else {
-      game.value.answerHistory.incorrectAnswers.push(currentFlashcard.value);
-    }
+  if (game.value.isShowAnswer) return;
 
-    game.value.isShowAnswer = true;
-
-    setTimeout(() => {
-      game.value.isShowAnswer = false;
-      game.value.currentQuestionIndex++;
-
-      if (game.value.currentQuestionIndex < settings.value.questionAmount) {
-        setCurrentQuestionFlashcards();
-      }
-    }, 2000);
+  if (answer === currentFlashcard.value.vocabulary) {
+    game.value.score++;
+    game.value.answerHistory.correctAnswers.push(currentFlashcard.value);
+  } else {
+    game.value.answerHistory.incorrectAnswers.push(currentFlashcard.value);
   }
-};
 
-const resetGame = () => {
-  game.value.currentQuestionIndex = 0;
-  game.value.score = 0;
-  game.value.answerHistory = { correctAnswers: [], incorrectAnswers: [] };
-  game.value.flashcards = shuffle(flashcards.value).slice(
-    0,
-    settings.value.questionAmount
-  );
-  setCurrentQuestionFlashcards();
+  game.value.isShowAnswer = true;
+
+  setTimeout(() => {
+    game.value.isShowAnswer = false;
+    game.value.currentQuestionIndex++;
+
+    if (game.value.currentQuestionIndex < settings.value.questionAmount) {
+      setCurrentQuestionFlashcards();
+    }
+  }, 2000);
 };
 
 const playAgain = () => {
   resetGame();
-};
-
-const handleBackButton = () => {
-  resetGame();
-  showSettings();
+  initalGameSetup();
 };
 </script>
 
@@ -138,7 +135,7 @@ const handleBackButton = () => {
         </div>
       </div>
 
-      <button class="quiz-back-button" @click="handleBackButton()">
+      <button class="quiz-back-button" @click="showSettingsScreen()">
         <img
           alt="back to settings"
           :src="emojiSvgUrl('1f519')"
