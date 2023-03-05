@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
-
-import { shuffle } from "../helpers";
-
 import { useQuizStore } from "../store/quiz";
+
 import QuizButton from "./QuizButton.vue";
 import QuizFinished from "./QuizFinished.vue";
+
+import { shuffle, emojiSvgUrl } from "../helpers";
 
 const quizStore = useQuizStore();
 
@@ -128,7 +128,7 @@ const handleBackButton = () => {
       <button class="quiz-back-button" v-on:click="handleBackButton()">
         <img
           alt="back to settings"
-          src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f519.svg"
+          :src="emojiSvgUrl('1f519')"
           height="20"
           width="20"
         />

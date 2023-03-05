@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useQuizStore } from "../store/quiz";
-import { sample } from "../helpers";
+
+import { sample, emojiSvgUrl } from "../helpers";
 
 type Props = {
   score: number;
@@ -49,7 +50,7 @@ const generateImageLink = () => {
     resultEmojiCode = sample(resultEmojiCodes["studyTime"]);
   }
 
-  return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${resultEmojiCode}.svg`;
+  return emojiSvgUrl(resultEmojiCode);
 };
 </script>
 

@@ -14,3 +14,10 @@ export function shuffle<T>(array: T[]): T[] {
 export function sample<T>(array: T[]): T {
   return array[Math.floor(Math.random() * array.length)];
 }
+
+export function emojiSvgUrl(emojiCode: string) {
+  const twemojiSvgBaseUrl =
+    "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/";
+
+  return `${twemojiSvgBaseUrl}${emojiCode}.svg`;
+}

@@ -1,22 +1,15 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useQuizStore } from "../store/quiz";
+
 import AppButton from "./AppButton.vue";
+
+import { emojiSvgUrl } from "@/helpers";
 
 const quizStore = useQuizStore();
 
 const { category, flashcards, isShowSettings, languageVariety, settings } =
   storeToRefs(quizStore);
-
-const twemojiBaseUrl =
-  "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/";
-const languageEmojiUrl = computed(
-  () => `${twemojiBaseUrl}${languageVariety.value.emojiCode}.svg`
-);
-const categoryEmojiUrl = computed(
-  () => `${twemojiBaseUrl}${category.value.emojiCode}.svg`
-);
 </script>
 
 <template>
@@ -75,13 +68,13 @@ const categoryEmojiUrl = computed(
     <section class="pure-u-1 pure-u-md-1-2">
       <div class="quiz-start-images">
         <img
-          :src="languageEmojiUrl"
+          :src="emojiSvgUrl(languageVariety.emojiCode)"
           height="100"
           width="100"
           :alt="`${languageVariety.name} icon`"
         />
         <img
-          :src="categoryEmojiUrl"
+          :src="emojiSvgUrl(category.emojiCode)"
           height="100"
           width="100"
           :alt="`${category.name} icon`"
