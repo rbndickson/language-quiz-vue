@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useQuizStore } from "../store/quiz";
 import QuizSettings from "./QuizSettings.vue";
 import QuizGame from "./QuizGame.vue";

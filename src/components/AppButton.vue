@@ -1,30 +1,14 @@
-<script setup>
-defineProps({
-  xSmall: {
-    type: Boolean,
-    default: false,
-  },
-  small: {
-    type: Boolean,
-    default: false,
-  },
-  medium: {
-    type: Boolean,
-    default: false,
-  },
-  inline: {
-    type: Boolean,
-    default: false,
-  },
-  blue: {
-    type: Boolean,
-    default: false,
-  },
-  green: {
-    type: Boolean,
-    default: false,
-  },
-});
+<script setup lang="ts">
+type Props = {
+  xSmall?: boolean;
+  small?: boolean;
+  medium?: boolean;
+  inline?: boolean;
+  blue?: boolean;
+  green?: boolean;
+};
+
+defineProps<Props>();
 </script>
 
 <template>

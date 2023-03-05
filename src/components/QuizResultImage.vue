@@ -1,14 +1,13 @@
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useQuizStore } from "../store/quiz";
 import { sample } from "../helpers";
 
-const props = defineProps({
-  score: {
-    type: Number,
-    required: true,
-  },
-});
+type Props = {
+  score: number;
+};
+
+const props = defineProps<Props>();
 
 const quizStore = useQuizStore();
 

@@ -1,19 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useQuizStore } from "../store/quiz";
 import AppButton from "./AppButton.vue";
 import QuizResultImage from "./QuizResultImage.vue";
 
-defineProps({
-  score: {
-    type: Number,
-    required: true,
-  },
-  answerHistory: {
-    type: Object,
-    required: true,
-  },
-});
+import type { AnswerHistory } from "@/store/quiz";
+
+type Props = {
+  score: number;
+  answerHistory: AnswerHistory;
+};
+
+defineProps<Props>();
 
 const quizStore = useQuizStore();
 

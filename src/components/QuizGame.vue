@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
@@ -36,7 +36,7 @@ const setCurrentQuestionFlashcards = () => {
   questionFlashcards.push(currentFlashcard.value);
   game.value.currentQuestionFlashcards = shuffle(questionFlashcards);
 };
-const processAnswer = (answer) => {
+const processAnswer = (answer: string) => {
   if (game.value.isShowAnswer === false) {
     if (answer === currentFlashcard.value.vocabulary) {
       game.value.score++;

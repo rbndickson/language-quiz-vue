@@ -1,14 +1,10 @@
-<script setup>
-defineProps({
-  correct: {
-    type: Boolean,
-    default: false,
-  },
-  incorrect: {
-    type: Boolean,
-    default: false,
-  },
-});
+<script setup lang="ts">
+type Props = {
+  correct?: boolean;
+  incorrect?: boolean;
+};
+
+defineProps<Props>();
 </script>
 
 <template>

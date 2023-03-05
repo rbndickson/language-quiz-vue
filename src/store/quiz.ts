@@ -5,8 +5,13 @@ import type { ApiData } from "@/data";
 import type { Flashcard } from "@/types/flashcard";
 
 export interface Settings {
-  questionAmount: number | null;
+  questionAmount: number;
   level: "normal" | "difficult";
+}
+
+export interface AnswerHistory {
+  correctAnswers: Flashcard[];
+  incorrectAnswers: Flashcard[];
 }
 
 export interface Game {
@@ -15,7 +20,7 @@ export interface Game {
   currentQuestionIndex: number;
   currentQuestionFlashcards: Flashcard[];
   isShowAnswer: boolean;
-  answerHistory: { correctAnswers: any[]; incorrectAnswers: any[] };
+  answerHistory: AnswerHistory;
 }
 
 export const useQuizStore = defineStore("quiz", () => {
@@ -26,7 +31,7 @@ export const useQuizStore = defineStore("quiz", () => {
   const isShowSettings = ref(true);
 
   const initialSettings: Settings = {
-    questionAmount: null,
+    questionAmount: 0,
     level: "normal",
   };
 
