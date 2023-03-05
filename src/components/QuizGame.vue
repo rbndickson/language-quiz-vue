@@ -110,7 +110,7 @@ const handleBackButton = () => {
             class="quiz-button-item"
           >
             <QuizButton
-              v-on:click="processAnswer(flashcard.vocabulary)"
+              @click="processAnswer(flashcard.vocabulary)"
               :correct="
                 game.isShowAnswer &&
                 flashcard.vocabulary === currentFlashcard.vocabulary
@@ -125,7 +125,7 @@ const handleBackButton = () => {
           </div>
         </div>
       </div>
-      <button class="quiz-back-button" v-on:click="handleBackButton()">
+      <button class="quiz-back-button" @click="handleBackButton()">
         <img
           alt="back to settings"
           :src="emojiSvgUrl('1f519')"

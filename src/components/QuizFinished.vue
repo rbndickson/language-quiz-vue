@@ -24,10 +24,8 @@ const { isShowSettings, settings } = storeToRefs(quizStore);
     <h3>You scored {{ score }} out of {{ settings.questionAmount }}</h3>
     <QuizResultImage :score="score"></QuizResultImage>
     <div>
-      <AppButton v-on:click="$emit('playAgain')" medium> Play again </AppButton>
-      <AppButton v-on:click="isShowSettings = true" medium>
-        Settings
-      </AppButton>
+      <AppButton @click="$emit('playAgain')" medium> Play again </AppButton>
+      <AppButton @click="isShowSettings = true" medium> Settings </AppButton>
     </div>
     <br />
     <h3>Review</h3>

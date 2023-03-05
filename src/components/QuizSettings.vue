@@ -22,7 +22,7 @@ const { category, flashcards, isShowSettings, languageVariety, settings } =
       <div class="question-amount-buttons text-center">
         <AppButton
           v-if="flashcards.length >= 5"
-          v-on:click="settings.questionAmount = 5"
+          @click="settings.questionAmount = 5"
           x-small
           inline
         >
@@ -30,7 +30,7 @@ const { category, flashcards, isShowSettings, languageVariety, settings } =
         </AppButton>
         <AppButton
           v-if="flashcards.length >= 10"
-          v-on:click="settings.questionAmount = 10"
+          @click="settings.questionAmount = 10"
           x-small
           inline
         >
@@ -38,7 +38,7 @@ const { category, flashcards, isShowSettings, languageVariety, settings } =
         </AppButton>
         <AppButton
           v-if="flashcards.length > 10"
-          v-on:click="settings.questionAmount = flashcards.length"
+          @click="settings.questionAmount = flashcards.length"
           x-small
           inline
         >
@@ -81,9 +81,7 @@ const { category, flashcards, isShowSettings, languageVariety, settings } =
         />
       </div>
       <div>
-        <AppButton v-on:click="isShowSettings = false" green>
-          Start!
-        </AppButton>
+        <AppButton @click="isShowSettings = false" green> Start! </AppButton>
       </div>
     </section>
   </div>
